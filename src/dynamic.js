@@ -1,3 +1,5 @@
+import { personalInfo, links } from './info'
+
 const getTime = () => {
     const date = new Date()
     const hours = date.getHours()
@@ -5,13 +7,13 @@ const getTime = () => {
     const seconds = date.getSeconds()
     return `${hours}${minutes < 10 ? ':0' : ':'}${minutes}${seconds < 10 ? ':0' : ':'}${seconds}`
   }
-  
+
   const introduction = [
-    `Welcome to Droit.`,
+    `Welcome to ${personalInfo.name}.`,
     {
       type: 'system',
       label: 'System',
-      content: `cd Droit`
+      content: `cd ${personalInfo.name}`
     },
     {
       type: 'system',
@@ -22,49 +24,39 @@ const getTime = () => {
       time: getTime(),
       type: 'info',
       label: 'Name:',
-      content: 'Droit'
+      content: personalInfo.name
     },
     {
       time: getTime(),
       type: 'info',
       label: 'Sex:',
-      content: 'Male'
+      content: personalInfo.sex
     },
     {
       time: getTime(),
       type: 'info',
       label: 'Age:',
-      content: '20'
+      content: personalInfo.age
     },
     {
       time: getTime(),
       type: 'info',
       label: 'Email:',
-      content: 'tunhe@gmail.com'
+      content: personalInfo.email
     },
     {
       time: getTime(),
       type: 'info',
       label: 'Aim:',
-      content: 'Three goals as follows:'
+      content: `${personalInfo.aims.length} goals as follows:`
     },
-    {
+    ...personalInfo.aims.map((aim, index) => ({
       type: 'black',
-      label: '=> 1.',
-      content: 'To make outstanding contributions to open source.'
-    },
-    {
-      type: 'black',
-      label: '=> 2.',
-      content: 'Become a full stack engineer.'
-    },
-    {
-      type: 'black',
-      label: '=> 3.',
-      content: 'Find a good job.'
-    }
+      label: `=> ${index + 1}.`,
+      content: aim
+    }))
   ]
-  
+
   export default {
     intro: {
       description: 'Introducting myself again.',
@@ -109,20 +101,19 @@ const getTime = () => {
             return
           }
           print({ type: 'success', label: 'Success', content: 'Opening' })
-  
+
           window.open(input, '_blank')
           resolve({ type: 'success', label: 'Done', content: 'Page Opened!' })
         })
       }
     },
-    //blog
     menu: {
       description: 'Open my menu in a new tab.',
       run(print) {
         return new Promise((resolve) => {
           print({ type: 'success', label: 'Success', content: 'Opening' })
-  
-          window.open('https://droit7.github.io', '_blank')
+
+          window.open(links.menu, '_blank')
           resolve({ type: 'success', label: 'Done', content: ':)' })
         })
       }
@@ -132,8 +123,8 @@ const getTime = () => {
       run(print) {
         return new Promise((resolve) => {
           print({ type: 'success', label: 'Success', content: 'Opening' })
-  
-          window.open('https://droit7.github.io', '_blank')
+
+          window.open(links.resume, '_blank')
           resolve({ type: 'success', label: 'Done', content: ':)' })
         })
       }
@@ -143,8 +134,8 @@ const getTime = () => {
       run(print) {
         return new Promise((resolve) => {
           print({ type: 'success', label: 'Success', content: 'Opening' })
-  
-          window.open('https://tomotoes.com/2048', '_blank')
+
+          window.open(links.game2048, '_blank')
           resolve({ type: 'success', label: 'Done', content: 'Game Start!' })
         })
       }

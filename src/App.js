@@ -9,7 +9,7 @@
 
 import Terminal from 'react-terminal-app'
 
-// �ɲο�: https://github.com/Tomotoes/react-terminal/blob/master/demo/src/commands
+// 可参考: https://github.com/Tomotoes/react-terminal/blob/master/demo/src/commands
 import staticList from './static'
 import dynamicList from './dynamic'
 
