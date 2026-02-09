@@ -2,7 +2,7 @@ export const personalInfo = {
   name: 'Droit',
   sex: 'Male',
   age: '20',
-  email: 'tunhe@gmail.com',
+  email: 'tunhe38@gmail.com',
   aims: [
     'To make outstanding contributions to open source.',
     'Become a full stack engineer.',

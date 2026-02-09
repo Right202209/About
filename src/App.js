@@ -19,14 +19,29 @@ const cmd = {
 }
 
 const config = {
-  prompt: '?  ~ ',
+  prompt: '➜  ~ ',
   version: '1.0.0',
   initialDirectory: 'Droit',
   bootCmd: 'intro'
 }
 
 function App() {
-   return <Terminal cmd={cmd} config={config} />
+  const desktopUrl = `${process.env.PUBLIC_URL}/macos26-desktop.jpg`
+  return (
+    <div className="desktop">
+      <div
+        className="desktop__bg"
+        style={{ backgroundImage: `url('${desktopUrl}'), var(--desktop-fallback)` }}
+        aria-hidden="true"
+      />
+      <div className="desktop__glow" aria-hidden="true" />
+      <div className="desktop__content">
+        <div className="terminal-frame" aria-label="Terminal window">
+          <Terminal className="terminal terminal--robbyrussell" cmd={cmd} config={config} />
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default App;
