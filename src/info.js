@@ -11,9 +11,9 @@ export const personalInfo = {
 };
 
 export const links = {
-  menu: 'https://droit7.github.io',
-  resume: 'https://droit7.github.io',
-  game2048: 'https://tomotoes.com/2048'
+  menu: 'https://right202209.github.io',
+  resume: 'https://right202209.github.io/',
+  game2048: 'https://right202209.github.io/2048/'
 };
 
 export const contacts = [
