@@ -4,6 +4,9 @@
   --desktop-fallback: radial-gradient(circle at 20% 20%, rgba(75, 124, 255, 0.45), transparent 45%),
     radial-gradient(circle at 80% 40%, rgba(255, 123, 172, 0.35), transparent 40%),
     linear-gradient(140deg, #1b2534, #141c28 35%, #0b111a);
+  --terminal-shell-bg: rgba(20, 23, 27, 0.72);
+  --terminal-shell-border: rgba(255, 255, 255, 0.16);
+  --terminal-shell-glow: rgba(86, 133, 255, 0.24);
   --terminal-bg: rgba(15, 17, 19, 0.92);
   --terminal-border: rgba(255, 255, 255, 0.12);
   --terminal-shadow: 0 32px 60px rgba(6, 10, 16, 0.55);
@@ -70,23 +73,72 @@ body {
   align-items: center;
   justify-content: center;
   padding: 6vh 4vw;
+  perspective: 1400px;
 }
 
 .terminal-frame {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   width: min(980px, 94vw);
-  border-radius: 18px;
-  box-shadow: var(--terminal-shadow);
+  border-radius: 20px;
+  border: 1px solid var(--terminal-shell-border);
+  background: var(--terminal-shell-bg);
+  backdrop-filter: blur(10px) saturate(1.2);
+  box-shadow: var(--terminal-shadow), 0 12px 42px rgba(0, 0, 0, 0.4);
+  transform-origin: center center;
+  animation: terminal-enter 0.65s ease-out both, terminal-float 8s ease-in-out infinite 0.75s;
+}
+
+.terminal-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0) 30%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.terminal-frame::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -20px;
+  width: 84%;
+  height: 96px;
+  border-radius: 999px;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(86, 133, 255, 0.34) 0%,
+    rgba(86, 133, 255, 0.16) 45%,
+    transparent 74%
+  );
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(14px);
 }
 
 .terminal {
+  position: relative !important;
   width: 100% !important;
   margin: 0 !important;
+  font-size: clamp(13px, 1.1vw, 16px) !important;
 }
 
 .terminal > div:first-child {
-  background: rgba(32, 34, 37, 0.95) !important;
-  border-top-left-radius: 18px;
-  border-top-right-radius: 18px;
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  left: auto !important;
+  z-index: 2 !important;
+  padding: 4px 0 !important;
+  background: rgba(36, 38, 41, 0.9) !important;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .terminal > div:first-child h4 {
@@ -97,11 +149,34 @@ body {
 }
 
 .terminal > div:nth-child(2) {
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  left: auto !important;
+  margin-top: 0 !important;
+  min-height: 300px !important;
+  height: min(72vh, 760px) !important;
+  max-height: min(72vh, 760px) !important;
+  overflow: auto !important;
   background: var(--terminal-bg) !important;
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   border: 1px solid var(--terminal-border);
+  border-top: 0;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.terminal > div:nth-child(2)::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal > div:nth-child(2)::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+}
+
+.terminal > div:nth-child(2) > div {
+  padding: 22px 24px !important;
 }
 
 .terminal .cmd {
@@ -159,8 +234,58 @@ body {
   transform: none;
 }
 
+@keyframes terminal-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes terminal-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .terminal-frame {
+    animation: none;
+  }
+}
+
 @media (max-width: 768px) {
+  .desktop__content {
+    align-items: flex-start;
+    padding: 3vh 3vw;
+  }
+
   .terminal-frame {
     width: min(94vw, 720px);
+    border-radius: 16px;
+  }
+
+  .terminal > div:first-child {
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+
+  .terminal > div:nth-child(2) {
+    min-height: 240px !important;
+    height: min(78vh, 680px) !important;
+    max-height: min(78vh, 680px) !important;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+  }
+
+  .terminal > div:nth-child(2) > div {
+    padding: 16px 14px !important;
   }
 }
