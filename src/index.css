@@ -677,12 +677,59 @@ body {
   color: var(--terminal-text) !important;
 }
 
+.terminal .terminal__inner p {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0 0 8px;
+  line-height: 1.45;
+}
+
+.terminal .terminal__inner p > span:first-child {
+  flex-shrink: 0;
+  white-space: pre;
+}
+
+.terminal .terminal__inner p > span:last-child {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 .terminal p > span:first-child {
   color: var(--terminal-green) !important;
 }
 
 .terminal input {
   color: transparent !important;
+}
+
+.terminal .terminal__prompt-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0 0;
+}
+
+.terminal .terminal__prompt {
+  flex-shrink: 0;
+  color: var(--terminal-green);
+  font-family: "JetBrains Mono", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+.terminal .terminal__input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--terminal-text) !important;
+  caret-color: var(--terminal-text);
+  font-family: "JetBrains Mono", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 1em;
+}
+
+.terminal .terminal__input:disabled {
+  opacity: 0.65;
 }
 
 .fade {

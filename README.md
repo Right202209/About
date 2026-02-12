@@ -63,4 +63,4 @@ Deploys the production build to GitHub Pages.
 - [ ] **Matrix effect**: A full-screen digital rain animation command.
 
 ---
-Built with [react-terminal-app](https://github.com/Tomotoes/react-terminal-app).
+Built with React and a custom terminal shell component.

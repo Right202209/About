@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import Terminal from 'react-terminal-app'
+import Terminal from './components/TerminalShell'
 
 // 可参考: https://github.com/Tomotoes/react-terminal/blob/master/demo/src/commands
 import staticList from './static'
