@@ -38,72 +38,135 @@ const desktopIcons = [
 function DockGlyph({ type }) {
   if (type === 'finder') {
     return (
-      <svg className="dock__glyph" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M4 4h16v16H4z" fill="none" stroke="currentColor" strokeWidth="1.6" />
-        <path d="M12 4v16" stroke="currentColor" strokeWidth="1.4" />
-        <circle cx="8.4" cy="10" r="1" fill="currentColor" />
-        <circle cx="15.6" cy="10" r="1" fill="currentColor" />
-        <path d="M8.3 14.2c1.2 1.6 3.1 1.6 4.2 0" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <svg className="dock__glyph" viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="finder-l" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stopColor="#9fe4ff" />
+            <stop offset="100%" stopColor="#3fa7ff" />
+          </linearGradient>
+          <linearGradient id="finder-r" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stopColor="#c8f0ff" />
+            <stop offset="100%" stopColor="#7bc6ff" />
+          </linearGradient>
+        </defs>
+        <rect x="8" y="8" width="48" height="48" rx="12" fill="url(#finder-l)" />
+        <path d="M32 8h12a12 12 0 0 1 12 12v24a12 12 0 0 1-12 12H32z" fill="url(#finder-r)" />
+        <path d="M32 8v48" stroke="#2a6aa0" strokeWidth="2.2" />
+        <circle cx="24" cy="27" r="2.1" fill="#1b4f82" />
+        <circle cx="40" cy="27" r="2.1" fill="#1b4f82" />
+        <path d="M22 38c3.7 4.2 8.3 4.2 12 0" fill="none" stroke="#1b4f82" strokeWidth="2.2" strokeLinecap="round" />
+        <path d="M34 38c2.3 1.9 4.8 2.1 8 0" fill="none" stroke="#1b4f82" strokeWidth="2.2" strokeLinecap="round" />
+        <rect x="8" y="8" width="48" height="48" rx="12" fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth="1.2" />
       </svg>
     )
   }
 
   if (type === 'safari') {
     return (
-      <svg className="dock__glyph" viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" strokeWidth="1.6" />
-        <path d="M12 12l4.4-3.8-2.8 5.7z" fill="currentColor" />
+      <svg className="dock__glyph" viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <radialGradient id="safari-bg" cx="50%" cy="38%" r="60%">
+            <stop offset="0%" stopColor="#6fe6ff" />
+            <stop offset="100%" stopColor="#2388ff" />
+          </radialGradient>
+        </defs>
+        <rect x="8" y="8" width="48" height="48" rx="12" fill="url(#safari-bg)" />
+        <circle cx="32" cy="32" r="16" fill="none" stroke="#f3f8ff" strokeWidth="2.6" />
+        <circle cx="32" cy="32" r="11.5" fill="none" stroke="rgba(243,248,255,0.65)" strokeWidth="1.2" />
+        <path d="M32 32l11-9-6.3 14.8z" fill="#ff4f5e" />
+        <path d="M32 32l-11 9 6.2-14.8z" fill="#ffffff" />
+        <circle cx="32" cy="32" r="2.3" fill="#f6fbff" />
+        <rect x="8" y="8" width="48" height="48" rx="12" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.2" />
       </svg>
     )
   }
 
   if (type === 'mail') {
     return (
-      <svg className="dock__glyph" viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="4.2" y="6.2" width="15.6" height="11.6" rx="1.8" fill="none" stroke="currentColor" strokeWidth="1.6" />
-        <path d="M4.8 7.1L12 12.5l7.2-5.4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <svg className="dock__glyph" viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="mail-bg" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stopColor="#7fd2ff" />
+            <stop offset="100%" stopColor="#367bff" />
+          </linearGradient>
+        </defs>
+        <rect x="8" y="8" width="48" height="48" rx="12" fill="url(#mail-bg)" />
+        <rect x="14" y="18" width="36" height="28" rx="5.4" fill="#f8fcff" />
+        <path d="M14 20l18 14L50 20" fill="none" stroke="#9cb9e8" strokeWidth="2.1" />
+        <path d="M14 43l11-10M50 43L39 33" fill="none" stroke="#d6e5fb" strokeWidth="1.8" />
+        <rect x="8" y="8" width="48" height="48" rx="12" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.2" />
       </svg>
     )
   }
 
   if (type === 'music') {
     return (
-      <svg className="dock__glyph" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M14.7 5.2v9.2a2.4 2.4 0 1 1-1.4-2.2V7.5l5.4-1.5v7.1a2.4 2.4 0 1 1-1.4-2.2V4.1z" fill="currentColor" />
+      <svg className="dock__glyph" viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="music-bg" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stopColor="#ff78bf" />
+            <stop offset="100%" stopColor="#ff3f78" />
+          </linearGradient>
+        </defs>
+        <rect x="8" y="8" width="48" height="48" rx="12" fill="url(#music-bg)" />
+        <circle cx="42.5" cy="40.5" r="4.8" fill="#ffffff" />
+        <circle cx="27.8" cy="44.2" r="4.8" fill="#ffffff" />
+        <path d="M32.6 22.2v18.5a6 6 0 0 1-4.8 5.8c1.8-1.3 2.4-2.7 2.4-4.2V26.7l17-4.6v14.7a5.6 5.6 0 0 1-4.7 5.7c1.7-1.4 2.3-2.8 2.3-4.2V24.7z" fill="#ffffff" />
+        <rect x="8" y="8" width="48" height="48" rx="12" fill="none" stroke="rgba(255,255,255,0.48)" strokeWidth="1.2" />
       </svg>
     )
   }
 
   if (type === 'code') {
     return (
-      <svg className="dock__glyph" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M9.6 7.1L5.4 12l4.2 4.9" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M14.4 7.1l4.2 4.9-4.2 4.9" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M13.2 5.3l-2.4 13.4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <svg className="dock__glyph" viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="code-bg" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stopColor="#46a5ff" />
+            <stop offset="100%" stopColor="#256dff" />
+          </linearGradient>
+        </defs>
+        <rect x="8" y="8" width="48" height="48" rx="12" fill="url(#code-bg)" />
+        <path d="M41.5 19.5L29 29.3l-7.3-4.8-6.4 5.7 7.4 4.9-7.4 4.8 6.4 5.8 7.3-4.8 12.5 9.7z" fill="#e8f5ff" fillOpacity="0.92" />
+        <path d="M41.5 19.5v34.8l7.2-3.7V23.2z" fill="#cde9ff" />
+        <rect x="8" y="8" width="48" height="48" rx="12" fill="none" stroke="rgba(255,255,255,0.45)" strokeWidth="1.2" />
       </svg>
     )
   }
 
   if (type === 'settings') {
     return (
-      <svg className="dock__glyph" viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="12" cy="12" r="2.8" fill="none" stroke="currentColor" strokeWidth="1.5" />
-        <path
-          d="M12 4.6v2.1M12 17.3v2.1M4.6 12h2.1M17.3 12h2.1M6.8 6.8l1.5 1.5M15.7 15.7l1.5 1.5M17.2 6.8l-1.5 1.5M8.3 15.7l-1.5 1.5"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.4"
-          strokeLinecap="round"
-        />
+      <svg className="dock__glyph" viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="set-bg" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stopColor="#cfd8e8" />
+            <stop offset="100%" stopColor="#8f9db8" />
+          </linearGradient>
+        </defs>
+        <rect x="8" y="8" width="48" height="48" rx="12" fill="url(#set-bg)" />
+        <g fill="none" stroke="#485976" strokeWidth="2.6" strokeLinecap="round">
+          <circle cx="32" cy="32" r="8.2" fill="#dfe6f2" />
+          <path d="M32 18v4M32 42v4M18 32h4M42 32h4M22.6 22.6l2.8 2.8M38.6 38.6l2.8 2.8M41.4 22.6l-2.8 2.8M25.4 38.6l-2.8 2.8" />
+        </g>
+        <rect x="8" y="8" width="48" height="48" rx="12" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.2" />
       </svg>
     )
   }
 
   return (
-    <svg className="dock__glyph" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M7.1 7.1h9.8l-1 11.1H8.1z" fill="none" stroke="currentColor" strokeWidth="1.6" />
-      <path d="M9.2 7.1V5.6a2.8 2.8 0 0 1 5.6 0v1.5" fill="none" stroke="currentColor" strokeWidth="1.4" />
-      <path d="M10.2 10.1v5.7M12 10.1v5.7M13.8 10.1v5.7" fill="none" stroke="currentColor" strokeWidth="1.3" />
+    <svg className="dock__glyph" viewBox="0 0 64 64" aria-hidden="true">
+      <defs>
+        <linearGradient id="trash-bg" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stopColor="#f5f8ff" />
+          <stop offset="100%" stopColor="#ccd8ec" />
+        </linearGradient>
+      </defs>
+      <rect x="8" y="8" width="48" height="48" rx="12" fill="url(#trash-bg)" />
+      <path d="M22 22h20l-1.8 24H23.8z" fill="#dfe8f8" stroke="#7e90ad" strokeWidth="1.8" />
+      <path d="M19.5 22h25" stroke="#7186a8" strokeWidth="2.1" />
+      <path d="M26 22v-3.3a1.8 1.8 0 0 1 1.8-1.8h8.4a1.8 1.8 0 0 1 1.8 1.8V22" fill="none" stroke="#7186a8" strokeWidth="1.8" />
+      <path d="M27.8 27.5v13.3M32 27.5v13.3M36.2 27.5v13.3" stroke="#7d90af" strokeWidth="1.4" />
+      <rect x="8" y="8" width="48" height="48" rx="12" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="1.2" />
     </svg>
   )
 }
@@ -153,6 +216,39 @@ function App() {
     [now]
   )
 
+  useEffect(() => {
+    let rafId = 0
+    const root = document.documentElement
+
+    const setPupilPosition = (x, y) => {
+      const offsetX = Math.max(-5, Math.min(5, ((x / window.innerWidth) - 0.5) * 12))
+      const offsetY = Math.max(-5, Math.min(5, ((y / window.innerHeight) - 0.5) * 12))
+      root.style.setProperty('--googly-pupil-x', `${offsetX}px`)
+      root.style.setProperty('--googly-pupil-y', `${offsetY}px`)
+    }
+
+    const handlePointerMove = event => {
+      if (rafId) {
+        cancelAnimationFrame(rafId)
+      }
+      rafId = requestAnimationFrame(() => {
+        setPupilPosition(event.clientX, event.clientY)
+      })
+    }
+
+    setPupilPosition(window.innerWidth / 2, window.innerHeight / 2)
+    window.addEventListener('pointermove', handlePointerMove, { passive: true })
+
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove)
+      if (rafId) {
+        cancelAnimationFrame(rafId)
+      }
+      root.style.removeProperty('--googly-pupil-x')
+      root.style.removeProperty('--googly-pupil-y')
+    }
+  }, [])
+
   return (
     <div className="desktop">
       <div className="desktop__bg" aria-hidden="true">
@@ -166,6 +262,14 @@ function App() {
       <div className="desktop__menu" aria-hidden="true">
         <div className="desktop__menu-left">
           <span className="menu__apple" />
+          <div className="googly-eyes googly-eyes--menu">
+            <span className="googly-eye">
+              <span className="googly-pupil" />
+            </span>
+            <span className="googly-eye">
+              <span className="googly-pupil" />
+            </span>
+          </div>
           <span className="menu__app">Terminal</span>
           {menuItems.map(item => (
             <span key={item} className="menu__item">

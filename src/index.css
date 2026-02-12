@@ -12,6 +12,8 @@
   --menu-shell-height: 36px;
   --dock-shell-bottom: 22px;
   --dock-shell-reserve: 94px;
+  --googly-pupil-x: 0px;
+  --googly-pupil-y: 0px;
   --terminal-shell-bg: rgba(20, 23, 27, 0.72);
   --terminal-shell-border: rgba(255, 255, 255, 0.16);
   --terminal-shell-glow: rgba(86, 133, 255, 0.24);
@@ -286,6 +288,58 @@ body {
   pointer-events: none;
 }
 
+.googly-eyes {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+}
+
+.googly-eyes--menu {
+  position: relative;
+  margin: 0 4px 0 0;
+}
+
+.googly-eye {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  border: 1.2px solid rgba(53, 65, 92, 0.55);
+  background: radial-gradient(circle at 34% 30%, #ffffff 0%, #f7fbff 40%, #e8eff9 100%);
+  box-shadow: 0 2px 6px rgba(8, 14, 31, 0.3);
+  overflow: hidden;
+}
+
+.googly-eye:nth-child(2) {
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+}
+
+.googly-eye::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  width: 4px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.googly-pupil {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 35%, #2e3347, #0e1220 70%);
+  transform: translate(calc(-50% + (var(--googly-pupil-x) * 0.42)), calc(-50% + (var(--googly-pupil-y) * 0.42)));
+  transition: transform 60ms linear;
+}
+
 .desktop__icons {
   position: absolute;
   top: 64px;
@@ -403,23 +457,17 @@ body {
   border-radius: 12px;
   padding: 0;
   cursor: default;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 0;
   background: transparent;
-  box-shadow: inset 0 1px 8px rgba(255, 255, 255, 0.35), 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: none;
   transition: transform 180ms ease, filter 180ms ease;
 }
 
 .dock__glyph {
-  width: 24px;
-  height: 24px;
-  color: rgba(246, 250, 255, 0.96);
-  filter: drop-shadow(0 1px 1px rgba(9, 14, 31, 0.28));
+  width: 42px;
+  height: 42px;
+  filter: drop-shadow(0 3px 6px rgba(5, 12, 30, 0.34));
   pointer-events: none;
-}
-
-.dock__item--settings .dock__glyph,
-.dock__item--trash .dock__glyph {
-  color: rgba(53, 71, 98, 0.92);
 }
 
 .dock__tooltip {
@@ -453,34 +501,6 @@ body {
 
 .dock__item--active .dock__indicator {
   opacity: 0.95;
-}
-
-.dock__item--finder {
-  background: linear-gradient(135deg, #5cb3ff, #2f7dff);
-}
-
-.dock__item--safari {
-  background: linear-gradient(135deg, #54e0ff, #1986ff);
-}
-
-.dock__item--mail {
-  background: linear-gradient(135deg, #7fc6ff, #4f7dff);
-}
-
-.dock__item--music {
-  background: linear-gradient(135deg, #ff9fcc, #ff5f93);
-}
-
-.dock__item--code {
-  background: linear-gradient(135deg, #5f8dff, #5f5bff);
-}
-
-.dock__item--settings {
-  background: linear-gradient(135deg, #bcc7de, #7d8fb2);
-}
-
-.dock__item--trash {
-  background: linear-gradient(135deg, #ecf2ff, #afc0df);
 }
 
 .dock__item:hover {
@@ -778,6 +798,11 @@ body {
 }
 
 @media (max-width: 1024px) {
+  .googly-eyes--menu {
+    transform: scale(0.92);
+    margin-right: 2px;
+  }
+
   .desktop__icons {
     display: none;
   }
@@ -811,6 +836,10 @@ body {
     --menu-shell-height: 30px;
     --dock-shell-bottom: 12px;
     --dock-shell-reserve: 88px;
+  }
+
+  .googly-eyes--menu {
+    display: none;
   }
 
   .desktop__menu {
@@ -883,8 +912,8 @@ body {
   }
 
   .dock__glyph {
-    width: 19px;
-    height: 19px;
+    width: 33px;
+    height: 33px;
   }
 
   .dock__item:hover {
@@ -975,9 +1004,24 @@ body {
     border-radius: 9px;
   }
 
+  .googly-eye {
+    width: 22px;
+    height: 22px;
+  }
+
+  .googly-eye:nth-child(2) {
+    width: 20px;
+    height: 20px;
+  }
+
+  .googly-pupil {
+    width: 7px;
+    height: 7px;
+  }
+
   .dock__glyph {
-    width: 17px;
-    height: 17px;
+    width: 27px;
+    height: 27px;
   }
 
   .desktop__content {
