@@ -12,14 +12,14 @@ export const personalInfo = {
 
 export const links = {
   menu: 'https://right202209.github.io',
-  resume: 'https://right202209.github.io/',
+  resume: 'https://right202209.github.io',
   game2048: 'https://right202209.github.io/2048/'
 };
 
 export const contacts = [
   { label: 'Email:', content: '`tunhe38@gmail.com`' },
   { label: 'Github:', content: '`https://github.com/right202209`' },
-  { label: 'Twitter:', content: '`https://twitter.com`' },
+  { label: 'Twitter:', content: '`https://x.com/droit000`' },
   { label: 'Telegram:', content: '`https://t.me`' }
 ];
 
