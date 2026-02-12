@@ -8,7 +8,7 @@ const nameAsciiArt = [
   'DDDD   R  RR  OOO    III    T  '
 ]
 
-export default {
+const staticCommands = {
   contact: {
     description: 'Return a list of my contact information.',
     list: contacts.map(c => ({
@@ -38,3 +38,5 @@ export default {
     list: nameAsciiArt
   }
 }
+
+export default staticCommands

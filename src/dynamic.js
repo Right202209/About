@@ -57,7 +57,7 @@ const getTime = () => {
     }))
   ]
 
-  export default {
+  const dynamicCommands = {
     intro: {
       description: 'Introducting myself again.',
       run(print) {
@@ -141,3 +141,5 @@ const getTime = () => {
       }
     }
   }
+
+  export default dynamicCommands
