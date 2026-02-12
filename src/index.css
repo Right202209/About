@@ -76,11 +76,13 @@ body {
   perspective: 1400px;
 }
 
-.terminal-frame {
+.terminal {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  width: min(980px, 94vw);
+  width: min(980px, 94vw) !important;
+  max-width: min(980px, 94vw) !important;
+  margin: 0 !important;
   border-radius: 20px;
   border: 1px solid var(--terminal-shell-border);
   background: var(--terminal-shell-bg);
@@ -88,9 +90,10 @@ body {
   box-shadow: var(--terminal-shadow), 0 12px 42px rgba(0, 0, 0, 0.4);
   transform-origin: center center;
   animation: terminal-enter 0.65s ease-out both, terminal-float 8s ease-in-out infinite 0.75s;
+  font-size: clamp(13px, 1.1vw, 16px) !important;
 }
 
-.terminal-frame::before {
+.terminal::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -100,7 +103,7 @@ body {
   z-index: 2;
 }
 
-.terminal-frame::after {
+.terminal::after {
   content: "";
   position: absolute;
   left: 50%;
@@ -118,13 +121,6 @@ body {
   pointer-events: none;
   z-index: -1;
   filter: blur(14px);
-}
-
-.terminal {
-  position: relative !important;
-  width: 100% !important;
-  margin: 0 !important;
-  font-size: clamp(13px, 1.1vw, 16px) !important;
 }
 
 .terminal > div:first-child {
@@ -256,7 +252,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .terminal-frame {
+  .terminal {
     animation: none;
   }
 }
@@ -267,8 +263,9 @@ body {
     padding: 3vh 3vw;
   }
 
-  .terminal-frame {
-    width: min(94vw, 720px);
+  .terminal {
+    width: min(94vw, 720px) !important;
+    max-width: min(94vw, 720px) !important;
     border-radius: 16px;
   }
 

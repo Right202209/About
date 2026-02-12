@@ -36,9 +36,7 @@ function App() {
       />
       <div className="desktop__glow" aria-hidden="true" />
       <div className="desktop__content">
-        <div className="terminal-frame" aria-label="Terminal window">
-          <Terminal className="terminal terminal--robbyrussell" cmd={cmd} config={config} />
-        </div>
+        <Terminal className="terminal terminal--robbyrussell" cmd={cmd} config={config} />
       </div>
     </div>
   )
