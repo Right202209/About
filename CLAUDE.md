@@ -11,7 +11,7 @@ The working directory may be checked out on `gh-pages`. Check `git branch` befor
 
 ## What this is
 
-A terminal-style personal portfolio page ("About Me" for Droit), rendered inside a macOS-like desktop UI (menu bar, dock, desktop icons) built in React. The terminal itself comes from the `react-terminal-app` package; it boots with the `intro` command. Published to GitHub Pages at `https://right202209.github.io/about`.
+A terminal-style personal portfolio page ("About Me" for Droit), rendered inside a macOS-like desktop UI (menu bar, dock, desktop icons) built in React. The terminal itself comes from the `react-terminal-app` package; it boots with the `intro` command. Published to GitHub Pages at `https://right202209.github.io/About`.
 
 ## Commands
 
