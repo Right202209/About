@@ -4,6 +4,7 @@ import Terminal from 'react-terminal-app'
 // 可参考: https://github.com/Tomotoes/react-terminal/blob/master/demo/src/commands
 import staticList from './static'
 import dynamicList from './dynamic'
+import { personalInfo, claudeBrand } from './info'
 
 const cmd = {
   dynamicList,
@@ -11,11 +12,13 @@ const cmd = {
 }
 
 const config = {
-  prompt: '➜  ~ ',
+  prompt: '> ',
   version: '1.0.0',
   initialDirectory: 'Droit',
   bootCmd: 'intro'
 }
+
+const CLAUDE_LOGO = ' ▐▛███▜▌\n▝▜█████▛▘\n  ▘▘ ▝▝'
 
 const menuItems = ['File', 'Edit', 'View', 'Go', 'Window', 'Help']
 
@@ -24,7 +27,8 @@ const dockItems = [
   { key: 'safari', label: 'Safari' },
   { key: 'mail', label: 'Mail' },
   { key: 'music', label: 'Music' },
-  { key: 'code', label: 'Code', active: true },
+  { key: 'claude', label: 'Claude', active: true },
+  { key: 'code', label: 'Code' },
   { key: 'settings', label: 'Settings' },
   { key: 'trash', label: 'Trash' }
 ]
@@ -113,6 +117,32 @@ function DockGlyph({ type }) {
         <circle cx="27.8" cy="44.2" r="4.8" fill="#ffffff" />
         <path d="M32.6 22.2v18.5a6 6 0 0 1-4.8 5.8c1.8-1.3 2.4-2.7 2.4-4.2V26.7l17-4.6v14.7a5.6 5.6 0 0 1-4.7 5.7c1.7-1.4 2.3-2.8 2.3-4.2V24.7z" fill="#ffffff" />
         <rect x="8" y="8" width="48" height="48" rx="12" fill="none" stroke="rgba(255,255,255,0.48)" strokeWidth="1.2" />
+      </svg>
+    )
+  }
+
+  if (type === 'claude') {
+    return (
+      <svg className="dock__glyph" viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="claude-bg" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stopColor="#e8916f" />
+            <stop offset="100%" stopColor="#c9603f" />
+          </linearGradient>
+        </defs>
+        <rect x="8" y="8" width="48" height="48" rx="12" fill="url(#claude-bg)" />
+        <g stroke="#fdf5ee" strokeWidth="3.4" strokeLinecap="round">
+          <path d="M32 17.5V29" />
+          <path d="M32 35v11.5" />
+          <path d="M17.5 32H29" />
+          <path d="M35 32h11.5" />
+          <path d="M21.8 21.8l8 8" />
+          <path d="M34.2 34.2l8 8" />
+          <path d="M42.2 21.8l-8 8" />
+          <path d="M29.8 34.2l-8 8" />
+        </g>
+        <circle cx="32" cy="32" r="3.2" fill="#fdf5ee" />
+        <rect x="8" y="8" width="48" height="48" rx="12" fill="none" stroke="rgba(255,255,255,0.45)" strokeWidth="1.2" />
       </svg>
     )
   }
@@ -270,7 +300,7 @@ function App() {
               <span className="googly-pupil" />
             </span>
           </div>
-          <span className="menu__app">Terminal</span>
+          <span className="menu__app">{claudeBrand.app}</span>
           {menuItems.map(item => (
             <span key={item} className="menu__item">
               {item}
@@ -321,7 +351,36 @@ function App() {
         </div>
       </div>
       <div className="desktop__content">
-        <Terminal className="terminal terminal--robbyrussell" cmd={cmd} config={config} />
+        <div className="claude-window">
+          <div className="claude-titlebar">
+            <span className="claude-traffic" aria-hidden="true">
+              <i className="claude-traffic__dot claude-traffic__dot--close" />
+              <i className="claude-traffic__dot claude-traffic__dot--min" />
+              <i className="claude-traffic__dot claude-traffic__dot--max" />
+            </span>
+            <span className="claude-titlebar__title">
+              {personalInfo.name} — {claudeBrand.app}
+            </span>
+            <span className="claude-titlebar__spacer" aria-hidden="true" />
+          </div>
+          <div className="claude-banner">
+            <pre className="claude-banner__logo" aria-hidden="true">{CLAUDE_LOGO}</pre>
+            <div className="claude-banner__meta">
+              <p className="claude-banner__app">
+                {claudeBrand.app} <span>{claudeBrand.version}</span>
+              </p>
+              <p className="claude-banner__model">
+                {claudeBrand.model} · {claudeBrand.modelNote}
+              </p>
+              <p className="claude-banner__info">
+                {personalInfo.name} · {personalInfo.sex} · {personalInfo.age}
+              </p>
+              <p className="claude-banner__info">{personalInfo.email}</p>
+              <p className="claude-banner__info claude-banner__cwd">{claudeBrand.cwd}</p>
+            </div>
+          </div>
+          <Terminal className="terminal terminal--robbyrussell" cmd={cmd} config={config} />
+        </div>
       </div>
     </div>
   )

@@ -10,6 +10,14 @@ export const personalInfo = {
   ]
 };
 
+export const claudeBrand = {
+  app: 'Claude Code',
+  version: 'v2.0.0',
+  model: 'Fable 5',
+  modelNote: "Droit's portfolio",
+  cwd: '~/Droit'
+};
+
 export const links = {
   menu: 'https://right202209.github.io',
   resume: 'https://right202209.github.io',
