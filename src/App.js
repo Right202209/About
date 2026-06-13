@@ -228,13 +228,66 @@ function DesktopGlyph({ type }) {
   )
 }
 
+const THEME_KEY = 'about:theme'
+
+function getInitialTheme() {
+  if (typeof window === 'undefined') {
+    return 'light'
+  }
+  try {
+    const saved = window.localStorage.getItem(THEME_KEY)
+    if (saved === 'light' || saved === 'dark') {
+      return saved
+    }
+  } catch (e) {
+    /* localStorage may be unavailable (private mode) */
+  }
+  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+    ? 'dark'
+    : 'light'
+}
+
+function ThemeGlyph({ theme }) {
+  if (theme === 'dark') {
+    return (
+      <svg className="menu__theme-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="4.2" fill="currentColor" />
+        <g stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
+          <path d="M12 2.6v3M12 18.4v3M2.6 12h3M18.4 12h3M5.1 5.1l2.1 2.1M16.8 16.8l2.1 2.1M18.9 5.1l-2.1 2.1M7.2 16.8l-2.1 2.1" />
+        </g>
+      </svg>
+    )
+  }
+
+  return (
+    <svg className="menu__theme-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M20.5 14.6A8.2 8.2 0 1 1 9.4 3.5a6.6 6.6 0 0 0 11.1 11.1z" fill="currentColor" />
+    </svg>
+  )
+}
+
 function App() {
   const [now, setNow] = useState(() => new Date())
+  const [theme, setTheme] = useState(getInitialTheme)
 
   useEffect(() => {
     const timer = setInterval(() => setNow(new Date()), 1000 * 20)
     return () => clearInterval(timer)
   }, [])
+
+  useEffect(() => {
+    const root = document.documentElement
+    root.setAttribute('data-theme', theme)
+    try {
+      window.localStorage.setItem(THEME_KEY, theme)
+    } catch (e) {
+      /* ignore persistence failures */
+    }
+    const meta = document.querySelector('meta[name="theme-color"]')
+    if (meta) {
+      meta.setAttribute('content', theme === 'dark' ? '#03040b' : '#0b111a')
+    }
+  }, [theme])
 
   const menuClock = useMemo(
     () =>
@@ -289,8 +342,8 @@ function App() {
         <div className="desktop__orb desktop__orb--two" />
         <div className="desktop__orb desktop__orb--three" />
       </div>
-      <div className="desktop__menu" aria-hidden="true">
-        <div className="desktop__menu-left">
+      <div className="desktop__menu">
+        <div className="desktop__menu-left" aria-hidden="true">
           <span className="menu__apple" />
           <div className="googly-eyes googly-eyes--menu">
             <span className="googly-eye">
@@ -308,18 +361,27 @@ function App() {
           ))}
         </div>
         <div className="desktop__menu-right">
-          <span className="menu__status">
+          <span className="menu__status" aria-hidden="true">
             <span className="menu__dot" />
             Online
           </span>
-          <span className="menu__wifi">Wi-Fi</span>
-          <span className="menu__battery">
+          <span className="menu__wifi" aria-hidden="true">Wi-Fi</span>
+          <span className="menu__battery" aria-hidden="true">
             <span className="battery">
               <span className="battery__level" />
             </span>
             92%
           </span>
-          <span className="menu__clock">{menuClock}</span>
+          <span className="menu__clock" aria-hidden="true">{menuClock}</span>
+          <button
+            type="button"
+            className="menu__theme-toggle"
+            onClick={() => setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+          >
+            <ThemeGlyph theme={theme} />
+          </button>
         </div>
       </div>
       <div className="desktop__glow" aria-hidden="true" />

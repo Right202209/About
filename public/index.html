@@ -22,6 +22,18 @@
       }
     }
   </script>
+  <script>
+    (function () {
+      try {
+        var key = 'about:theme'
+        var saved = localStorage.getItem(key)
+        var theme = (saved === 'light' || saved === 'dark')
+          ? saved
+          : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+        document.documentElement.setAttribute('data-theme', theme)
+      } catch (e) {}
+    })()
+  </script>
 </head>
 
 <body>
