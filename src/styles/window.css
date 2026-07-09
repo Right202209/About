@@ -1,0 +1,272 @@
+/* Claude Code window: shell, traffic lights, titlebar and boot banner. */
+
+.claude-window {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: min(980px, 94vw);
+  max-width: min(980px, 94vw);
+  border-radius: 22px;
+  border: 1px solid var(--terminal-shell-border);
+  background: var(--terminal-shell-bg);
+  backdrop-filter: blur(18px) saturate(1.15);
+  box-shadow: var(--terminal-shadow), 0 12px 42px rgba(0, 0, 0, 0.4);
+  transform-origin: center center;
+  animation: terminal-enter 0.65s ease-out both, terminal-float 8s ease-in-out infinite 0.75s;
+}
+
+.claude-window::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0) 26%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.claude-window::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -20px;
+  width: 84%;
+  height: 96px;
+  border-radius: 999px;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(217, 119, 87, 0.3) 0%,
+    rgba(217, 119, 87, 0.14) 45%,
+    transparent 74%
+  );
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(14px);
+}
+
+.claude-titlebar {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 14px;
+  background: linear-gradient(180deg, rgba(48, 44, 40, 0.95), rgba(38, 35, 32, 0.95));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.claude-traffic {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 52px;
+}
+
+.claude-traffic__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.claude-traffic__dot--close {
+  background: #ff5f57;
+}
+
+.claude-traffic__dot--min {
+  background: #febc2e;
+}
+
+.claude-traffic__dot--max {
+  background: #28c840;
+}
+
+.claude-titlebar__title {
+  flex: 1;
+  text-align: center;
+  font-family: "JetBrains Mono", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--terminal-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.claude-titlebar__spacer {
+  width: 52px;
+}
+
+.claude-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 18px 24px 14px;
+  background: var(--terminal-bg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: "JetBrains Mono", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+.claude-banner__logo {
+  margin: 2px 0 0;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--claude-orange);
+  white-space: pre;
+  text-shadow: 0 0 18px rgba(217, 119, 87, 0.45);
+}
+
+.claude-banner__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.claude-banner__meta p,
+.claude-banner__meta h1 {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.claude-banner__app {
+  color: var(--terminal-text);
+  font-weight: 600;
+}
+
+.claude-banner__app span {
+  color: var(--terminal-muted);
+  font-weight: 400;
+}
+
+.claude-banner__model {
+  color: var(--claude-orange-bright);
+}
+
+.claude-banner__info {
+  color: var(--terminal-muted);
+}
+
+.claude-banner__cwd {
+  color: #8fb8e8;
+}
+
+@keyframes terminal-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes terminal-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .claude-window {
+    animation: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .claude-window {
+    width: min(96vw, 920px);
+    max-width: min(96vw, 920px);
+  }
+}
+
+@media (max-width: 768px) {
+  .claude-window {
+    width: min(95vw, 720px);
+    max-width: min(95vw, 720px);
+    border-radius: 18px;
+  }
+
+  .claude-titlebar {
+    height: 34px;
+    padding: 0 12px;
+  }
+
+  .claude-traffic {
+    gap: 6px;
+    width: 44px;
+  }
+
+  .claude-traffic__dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .claude-titlebar__title {
+    font-size: 11px;
+  }
+
+  .claude-titlebar__spacer {
+    width: 44px;
+  }
+
+  .claude-banner {
+    gap: 14px;
+    padding: 12px 14px 10px;
+  }
+
+  .claude-banner__logo {
+    font-size: 11.5px;
+  }
+
+  .claude-banner__meta p {
+    font-size: 11px;
+  }
+}
+
+@media (max-height: 740px) and (orientation: landscape) {
+  .claude-window {
+    width: min(98vw, 1080px);
+    max-width: min(98vw, 1080px);
+  }
+
+  .claude-titlebar {
+    height: 30px;
+  }
+
+  .claude-banner {
+    gap: 12px;
+    padding: 8px 14px 6px;
+  }
+
+  .claude-banner__logo {
+    font-size: 10px;
+  }
+
+  .claude-banner__meta p {
+    font-size: 10px;
+  }
+
+  .claude-banner__info {
+    display: none;
+  }
+
+  .claude-banner__cwd {
+    display: block;
+  }
+}

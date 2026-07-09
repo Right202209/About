@@ -1,0 +1,83 @@
+/* Googly eyes that live in the menu bar and follow the pointer. */
+
+.googly-eyes {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+}
+
+.googly-eyes--menu {
+  position: relative;
+  margin: 0 4px 0 0;
+}
+
+.googly-eye {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  border: 1.2px solid rgba(53, 65, 92, 0.55);
+  background: radial-gradient(circle at 34% 30%, #ffffff 0%, #f7fbff 40%, #e8eff9 100%);
+  box-shadow: 0 2px 6px rgba(8, 14, 31, 0.3);
+  overflow: hidden;
+}
+
+.googly-eye:nth-child(2) {
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+}
+
+.googly-eye::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  width: 4px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.googly-pupil {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 35%, #2e3347, #0e1220 70%);
+  transform: translate(calc(-50% + (var(--googly-pupil-x) * 0.42)), calc(-50% + (var(--googly-pupil-y) * 0.42)));
+  transition: transform 60ms linear;
+}
+
+@media (max-width: 1024px) {
+  .googly-eyes--menu {
+    transform: scale(0.92);
+    margin-right: 2px;
+  }
+}
+
+@media (max-width: 768px) {
+  .googly-eyes--menu {
+    display: none;
+  }
+}
+
+@media (max-height: 740px) and (orientation: landscape) {
+  .googly-eye {
+    width: 22px;
+    height: 22px;
+  }
+
+  .googly-eye:nth-child(2) {
+    width: 20px;
+    height: 20px;
+  }
+
+  .googly-pupil {
+    width: 7px;
+    height: 7px;
+  }
+}

@@ -1,0 +1,134 @@
+/* 工具箱卡片样式 (Simulated Claude Tool Box) */
+
+.claude-tool-box {
+  border-radius: 8px;
+  margin: 8px 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.claude-tool-box--running {
+  border-color: rgba(217, 119, 87, 0.4);
+  background: rgba(217, 119, 87, 0.04);
+}
+
+.claude-tool-box--success {
+  border-color: rgba(74, 222, 128, 0.25);
+  background: rgba(74, 222, 128, 0.02);
+}
+
+.claude-tool-box--error {
+  border-color: rgba(248, 113, 113, 0.3);
+  background: rgba(248, 113, 113, 0.03);
+}
+
+.claude-tool-box__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.claude-tool-box__status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #9ca3af;
+}
+
+.claude-tool-box--running .claude-tool-box__status-dot {
+  background: var(--claude-orange);
+  box-shadow: 0 0 8px var(--claude-orange);
+  animation: pulse-glow 1.5s infinite;
+}
+
+.claude-tool-box--success .claude-tool-box__status-dot {
+  background: #4ade80;
+}
+
+.claude-tool-box--error .claude-tool-box__status-dot {
+  background: #f87171;
+}
+
+.claude-tool-box__title {
+  font-size: 12px;
+  color: var(--terminal-text);
+  flex: 1;
+}
+
+.claude-tool-box__title strong {
+  color: #60a5fa;
+}
+
+.claude-tool-box__spinner {
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--claude-orange);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.claude-tool-box__body {
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--terminal-muted);
+  overflow-x: auto;
+  max-height: 200px;
+}
+
+.claude-tool-box__body pre {
+  margin: 0;
+  font-family: inherit;
+  white-space: pre-wrap;
+}
+
+.claude-tool-box__footer {
+  font-size: 11px;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.15);
+  color: #4ade80;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.claude-tool-box--error .claude-tool-box__footer {
+  color: #f87171;
+}
+
+/* 重启终端按钮 */
+.terminal-restart-btn {
+  background: var(--claude-orange);
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(217, 119, 87, 0.3);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.terminal-restart-btn:hover {
+  background: var(--claude-orange-bright);
+  transform: translateY(-1px);
+}
+
+.terminal-restart-btn:active {
+  transform: translateY(0);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
