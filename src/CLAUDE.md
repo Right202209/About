@@ -6,6 +6,7 @@ All displayed content comes from `src/info.js` (plain exports: `personalInfo`, `
 
 - `App.js` — thin composition of the desktop; `index.js` — CRA entry point.
 - `components/` — desktop chrome: `MenuBar`, `Dock`, `DesktopIcons`, `DesktopBackground` (pure-CSS wallpaper), `GooglyEyes` (pointer-driven via `--googly-pupil-x/y`), `ClaudeWindow` (titlebar + banner, hosts the terminal). Item lists (menu entries, dock apps, desktop icons) are local constants in their component files.
+- `components/apps/` — simple pages launched by clicking dock icons: `index.js` holds the `APPS` registry + `AppOverlay`; `AppWindow.js` is the shared chrome (✕/Esc closes). One page open at a time — `openApp` state lives in `App.js`; the Claude dock icon closes the overlay (back to the terminal). Styles in `styles/apps.css`.
 - `components/icons/` — SVG glyphs: `DockGlyph.js` (registry of dock icons), `DesktopGlyph.js`, `ThemeGlyph.js`. Dock icons draw on the shared rounded-tile base in `IconTile.js`; per-icon gradient/def ids must stay unique across the document (namespace them with the icon key).
 - `hooks/` — `useTheme` (localStorage + `data-theme` attribute; exports `DARK_THEME`/`LIGHT_THEME` — import these instead of writing `'dark'`/`'light'` literals), `useMenuClock`, `useGooglyPointer`.
 - `styles/` — one stylesheet per component, imported in order by `src/index.css`; the Google Fonts `@import` must stay on line 1 of `index.css`. Dark-mode overrides live next to their component's rules as `[data-theme="dark"]` selectors.

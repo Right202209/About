@@ -7,5 +7,7 @@
 @import './styles/desktop-icons.css';
 @import './styles/dock.css';
 @import './styles/window.css';
+@import './styles/apps.css';
+@import './styles/app-pages.css';
 @import './styles/terminal.css';
 @import './styles/toolbox.css';

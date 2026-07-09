@@ -56,11 +56,16 @@
   height: 46px;
   border-radius: 12px;
   padding: 0;
-  cursor: default;
+  cursor: pointer;
   border: 0;
   background: transparent;
   box-shadow: none;
   transition: transform 180ms ease, filter 180ms ease;
+}
+
+.dock__item:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 3px;
 }
 
 .dock__glyph {

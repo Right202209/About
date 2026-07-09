@@ -1,0 +1,231 @@
+/* App pages opened from the dock: shared overlay, window chrome, page pieces. */
+
+.app-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  padding:
+    calc(var(--menu-shell-top) + var(--menu-safe-top) + var(--menu-shell-height) + 18px)
+    4vw
+    calc(var(--dock-shell-reserve) + var(--dock-safe-bottom))
+    4vw;
+  pointer-events: none;
+}
+
+.app-window {
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  width: min(620px, 94vw);
+  max-height: 100%;
+  border-radius: 18px;
+  border: 1px solid var(--terminal-shell-border);
+  background: var(--terminal-shell-bg);
+  backdrop-filter: blur(24px) saturate(1.2);
+  box-shadow: 0 28px 64px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  animation: app-pop 0.28s ease-out both;
+}
+
+.app-window__titlebar {
+  display: flex;
+  align-items: center;
+  flex: none;
+  height: 38px;
+  padding: 0 14px;
+  background: linear-gradient(180deg, rgba(48, 44, 40, 0.95), rgba(38, 35, 32, 0.95));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.app-window__traffic {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 52px;
+}
+
+.app-window__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 0;
+  padding: 0;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.app-window__dot--close {
+  background: #ff5f57;
+  cursor: pointer;
+}
+
+.app-window__dot--close:hover {
+  filter: brightness(1.15);
+}
+
+.app-window__dot--min {
+  background: #febc2e;
+}
+
+.app-window__dot--max {
+  background: #28c840;
+}
+
+.app-window__title {
+  flex: 1;
+  text-align: center;
+  font-family: "JetBrains Mono", "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--terminal-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-window__spacer {
+  width: 52px;
+}
+
+.app-window__body {
+  overflow-y: auto;
+  padding: 16px 18px 20px;
+  background: var(--terminal-bg);
+  color: var(--terminal-text);
+  font-size: 13px;
+}
+
+.app-window__body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.app-window__body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+}
+
+/* ===== Shared page pieces ===== */
+
+.app-section-title {
+  margin: 14px 0 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--terminal-muted);
+}
+
+.app-section-title:first-child {
+  margin-top: 0;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 10px;
+}
+
+.app-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 8px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--terminal-text);
+  text-decoration: none;
+  text-align: center;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.app-tile:hover {
+  background: rgba(255, 255, 255, 0.09);
+  transform: translateY(-2px);
+}
+
+.app-tile__glyph {
+  font-size: 26px;
+  line-height: 1;
+}
+
+.app-tile__name {
+  font-size: 12px;
+  word-break: break-word;
+}
+
+.app-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  color: var(--terminal-text);
+  text-decoration: none;
+}
+
+.app-row:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.app-row__glyph {
+  flex: none;
+  width: 26px;
+  text-align: center;
+}
+
+.app-row__name {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.app-row__meta {
+  margin-left: auto;
+  color: var(--terminal-muted);
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-button {
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 8px;
+  background: var(--claude-orange);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(217, 119, 87, 0.3);
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.app-button:hover {
+  background: var(--claude-orange-bright);
+  transform: translateY(-1px);
+}
+
+@keyframes app-pop {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-window,
+  .app-tile,
+  .app-button {
+    animation: none;
+    transition: none;
+  }
+}

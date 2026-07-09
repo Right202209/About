@@ -1,0 +1,210 @@
+/* Per-app page layouts (chrome + shared pieces live in apps.css). */
+
+/* ===== Finder ===== */
+
+.app-finder {
+  display: grid;
+  grid-template-columns: 128px 1fr;
+  gap: 16px;
+}
+
+.app-finder__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-right: 12px;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.app-finder__place {
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  color: var(--terminal-muted);
+}
+
+.app-finder__place--active {
+  background: rgba(217, 119, 87, 0.18);
+  color: var(--terminal-text);
+}
+
+/* ===== Safari ===== */
+
+.app-safari__toolbar {
+  display: flex;
+  margin-bottom: 4px;
+}
+
+.app-safari__address {
+  flex: 1;
+  text-align: center;
+  padding: 7px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--terminal-muted);
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== Mail ===== */
+
+.app-mail__cta {
+  margin-top: 14px;
+  text-align: center;
+}
+
+/* ===== Music ===== */
+
+.app-music__hero {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 4px;
+}
+
+.app-music__cover {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ff78bf, #ff3f78);
+  color: #ffffff;
+  font-size: 30px;
+  box-shadow: 0 10px 22px rgba(255, 63, 120, 0.35);
+}
+
+.app-music__meta p {
+  margin: 2px 0;
+}
+
+.app-music__album {
+  font-weight: 600;
+}
+
+.app-music__artist {
+  color: var(--terminal-muted);
+  font-size: 12px;
+}
+
+.app-music__index {
+  color: var(--terminal-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===== Code ===== */
+
+.app-code__skill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 2px;
+}
+
+.app-code__lang {
+  width: 96px;
+  flex: none;
+  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+}
+
+.app-code__meter {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.app-code__fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--claude-orange), var(--claude-orange-bright));
+}
+
+.app-code__score {
+  width: 56px;
+  flex: none;
+  text-align: right;
+  color: var(--terminal-muted);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===== Settings ===== */
+
+.app-settings__choices {
+  display: flex;
+  gap: 10px;
+}
+
+.app-settings__choice {
+  flex: 1;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--terminal-text);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease;
+}
+
+.app-settings__choice:hover {
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.app-settings__choice--active {
+  border-color: var(--claude-orange);
+  background: rgba(217, 119, 87, 0.16);
+}
+
+/* ===== Trash ===== */
+
+.app-trash {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 28px 12px 20px;
+  text-align: center;
+}
+
+.app-trash__glyph {
+  font-size: 44px;
+}
+
+.app-trash__title {
+  margin: 6px 0 0;
+  font-weight: 600;
+}
+
+.app-trash__hint {
+  margin: 0;
+  color: var(--terminal-muted);
+  font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  .app-finder {
+    grid-template-columns: 1fr;
+  }
+
+  .app-finder__sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-right: 0;
+    padding-right: 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .app-row__name {
+    white-space: normal;
+  }
+}
