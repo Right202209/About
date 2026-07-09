@@ -1,22 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
-import Terminal from 'react-terminal-app'
-
-// 可参考: https://github.com/Tomotoes/react-terminal/blob/master/demo/src/commands
-import staticList from './static'
-import dynamicList from './dynamic'
+import ClaudeTerminal from './ClaudeTerminal'
 import { personalInfo, claudeBrand } from './info'
 
-const cmd = {
-  dynamicList,
-  staticList
-}
-
-const config = {
-  prompt: '> ',
-  version: '1.0.0',
-  initialDirectory: 'Droit',
-  bootCmd: 'intro'
-}
 
 const CLAUDE_LOGO = ' ▐▛███▜▌\n▝▜█████▛▘\n  ▘▘ ▝▝'
 
@@ -334,14 +319,17 @@ function App() {
 
   return (
     <div className="desktop">
-      <div className="desktop__bg" aria-hidden="true">
-        <div className="desktop__grain" />
-        <div className="desktop__beam desktop__beam--one" />
-        <div className="desktop__beam desktop__beam--two" />
-        <div className="desktop__orb desktop__orb--one" />
-        <div className="desktop__orb desktop__orb--two" />
-        <div className="desktop__orb desktop__orb--three" />
+      <div className="desktop__bg-container">
+        <div className="desktop__bg" aria-hidden="true">
+          <div className="desktop__grain" />
+          <div className="desktop__beam desktop__beam--one" />
+          <div className="desktop__beam desktop__beam--two" />
+          <div className="desktop__orb desktop__orb--one" />
+          <div className="desktop__orb desktop__orb--two" />
+          <div className="desktop__orb desktop__orb--three" />
+        </div>
       </div>
+
       <div className="desktop__menu">
         <div className="desktop__menu-left" aria-hidden="true">
           <span className="menu__apple" />
@@ -428,9 +416,9 @@ function App() {
           <div className="claude-banner">
             <pre className="claude-banner__logo" aria-hidden="true">{CLAUDE_LOGO}</pre>
             <div className="claude-banner__meta">
-              <p className="claude-banner__app">
+              <h1 className="claude-banner__app">
                 {claudeBrand.app} <span>{claudeBrand.version}</span>
-              </p>
+              </h1>
               <p className="claude-banner__model">
                 {claudeBrand.model} · {claudeBrand.modelNote}
               </p>
@@ -441,7 +429,7 @@ function App() {
               <p className="claude-banner__info claude-banner__cwd">{claudeBrand.cwd}</p>
             </div>
           </div>
-          <Terminal className="terminal terminal--robbyrussell" cmd={cmd} config={config} />
+          <ClaudeTerminal theme={theme} onThemeChange={setTheme} />
         </div>
       </div>
     </div>
