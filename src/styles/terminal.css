@@ -3,6 +3,8 @@
 .claude-terminal {
   display: flex;
   flex-direction: column;
+  /* 允许在 .claude-window 触达 max-height 时被压缩，保证标题栏/横幅完整可见 */
+  min-height: 0;
   height: clamp(
     260px,
     calc(

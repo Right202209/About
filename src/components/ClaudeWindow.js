@@ -1,7 +1,7 @@
 import ClaudeTerminal from '../terminal/ClaudeTerminal';
 import { claudeBrand, personalInfo } from '../info';
 
-const CLAUDE_LOGO = ' ▐▛███▜▌\n▝▜█████▛▘\n  ▘▘ ▝▝';
+const CLAUDE_LOGO_SRC = `${process.env.PUBLIC_URL}/claudecode.svg`;
 
 function TitleBar() {
   return (
@@ -22,7 +22,7 @@ function TitleBar() {
 function Banner() {
   return (
     <div className="claude-banner">
-      <pre className="claude-banner__logo" aria-hidden="true">{CLAUDE_LOGO}</pre>
+      <img className="claude-banner__logo" src={CLAUDE_LOGO_SRC} alt="" aria-hidden="true" />
       <div className="claude-banner__meta">
         <h1 className="claude-banner__app">
           {claudeBrand.app} <span>{claudeBrand.version}</span>
