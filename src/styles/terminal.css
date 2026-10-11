@@ -1,33 +1,10 @@
-.claude-terminal { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden; font-family: var(--font-mono); font-size: 12px; line-height: 1.65; color: var(--terminal-text); color-scheme: dark; }
-.claude-terminal__output { flex: 1; min-height: 0; overflow: auto; padding: 5px 26px 16px; display: flex; flex-direction: column; gap: 4px; overscroll-behavior: contain; }
-.claude-terminal__output > * { flex-shrink: 0; }
-.claude-terminal__input-row { display: flex; align-items: center; gap: 10px; margin: 0 23px; padding: 12px 1px; border-top: 1px solid #5e5d596e; border-bottom: 1px solid #5e5d596e; flex-shrink: 0; }
-.claude-terminal__prompt { color: var(--claude-orange); font-weight: 500; white-space: nowrap; user-select: none; }
-.claude-terminal__input-wrapper { position: relative; flex: 1; min-width: 0; display: flex; align-items: center; }
-.claude-terminal__suggestion-overlay { position: absolute; inset: 0; pointer-events: none; white-space: pre; font: inherit; display: flex; align-items: center; overflow: hidden; }
-.suggestion-overlay__typed { color: transparent; user-select: none; }
-.suggestion-overlay__ghost { color: var(--terminal-muted); opacity: .55; user-select: none; }
-.claude-terminal__input { position: relative; z-index: 1; width: 100%; background: transparent; color: var(--terminal-text); border: none; outline: none; font: inherit; padding: 0; margin: 0; caret-color: #dad8cf; }
-.claude-terminal__input::placeholder { color: #82817c; opacity: .85; }
-.claude-terminal__status { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 26px 12px; color: #85847f; font-size: 10px; user-select: none; }
-.claude-terminal__status kbd { color: #b2afa7; font: inherit; margin-right: 4px; }.claude-terminal__status kbd + kbd { margin-left: 12px; }
-.claude-terminal__line-success, .claude-terminal__line-info, .claude-terminal__line-warning, .claude-terminal__line-error, .claude-terminal__line-system, .claude-terminal__line-text, .claude-terminal__line-meta { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
-.claude-terminal__line-success { color: #c3cba8; }
-.claude-terminal__line-info { color: #d4c5b2; font-weight: 500; margin-top: 6px; }
-.claude-terminal__line-warning { color: #d9c18a; }
-.claude-terminal__line-error { color: #e98c82; }
-.claude-terminal__line-system { color: var(--terminal-muted); }
-.claude-terminal__line-text { color: var(--terminal-text); }
-.claude-terminal__line-meta { color: #88877f; font-size: 10px; padding-top: 12px; }
-.claude-terminal__line-input { display: flex; gap: 10px; margin: 9px 0 3px; overflow-wrap: anywhere; }
-.claude-terminal__input-echo { min-width: 0; white-space: pre-wrap; }
-.claude-terminal__thinking { color: var(--claude-orange); display: flex; align-items: center; gap: 4px; margin: 8px 0; }
-.dots { display: inline-block; width: 1em; }
-.dots::after { content: "..."; display: inline-block; animation: dots-wave 1.4s infinite steps(4); }
-@keyframes dots-wave { 0%, 20% { content: ""; } 40% { content: "."; } 60% { content: ".."; } 80%, 100% { content: "..."; } }
-@container (max-width: 600px) {
-  .claude-terminal { font-size: 11px; }
-  .claude-terminal__output { padding: 5px 16px 14px; }
-  .claude-terminal__input-row { margin: 0 14px; gap: 7px; }
-  .claude-terminal__status { padding: 8px 16px 10px; font-size: 9px; }
-}
+/* Terminal: a plain zsh-style window. */
+.mac-window--terminal { background: var(--terminal-bg); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); }
+.mac-window--terminal .mac-window__body { overflow: hidden; }
+.terminal-app { flex: 1; min-height: 0; overflow: auto; padding: 10px 14px 16px; font-family: var(--font-mono); font-size: 12px; line-height: 1.6; color: var(--terminal-text); color-scheme: dark; cursor: text; overscroll-behavior: contain; }
+.terminal-app__line { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.terminal-app__line--muted { color: var(--terminal-muted); }
+.terminal-app__prompt { color: var(--terminal-prompt); white-space: nowrap; user-select: none; }
+.terminal-app__row { display: flex; align-items: center; gap: 8px; }
+.terminal-app__input { flex: 1; min-width: 0; padding: 0; border: 0; outline: 0; background: transparent; color: var(--terminal-text); font: inherit; caret-color: var(--terminal-text); }
+@container (max-width: 600px) { .terminal-app { font-size: 11px; padding: 8px 10px 12px; } }

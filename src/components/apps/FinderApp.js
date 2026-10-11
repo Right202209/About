@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { finderItems, personalInfo } from '../../info';
+import { finderItems } from '../../content';
 import DesktopGlyph from '../icons/DesktopGlyph';
 import SystemGlyph from '../icons/SystemGlyph';
 
+const HOME_NAME = 'Home';
 const PLACES = [
   { name: 'Recents', icon: 'clock' }, { name: 'Desktop', icon: 'desktop' },
   { name: 'Documents', icon: 'document' }, { name: 'Downloads', icon: 'download' },
@@ -27,10 +28,10 @@ function FinderSidebar({ place, navigate }) {
     {PLACES.map(item => <button type="button" key={item.name} className={place === item.name ? 'is-selected' : ''} onClick={() => navigate(item.name)} aria-current={place === item.name ? 'page' : undefined}><SystemGlyph name={item.icon} /><span>{item.name}</span></button>)}
     <p>Locations</p>
     <button type="button" className={place === 'Home' ? 'is-selected' : ''} onClick={() => navigate('Home')}><SystemGlyph name="desktop" /><span>Macintosh HD</span></button>
-    <button type="button" className={place === 'Assets' ? 'is-selected' : ''} onClick={() => navigate('Assets')}><SystemGlyph name="folder" /><span>Assets</span></button>
+    <button type="button" className={place === 'Pictures' ? 'is-selected' : ''} onClick={() => navigate('Pictures')}><SystemGlyph name="folder" /><span>Pictures</span></button>
     <p>Tags</p>
     <button type="button" onClick={() => navigate('Projects')}><span className="finder-tag finder-tag--green" /><span>Projects</span></button>
-    <button type="button" onClick={() => navigate('Documents')}><span className="finder-tag finder-tag--orange" /><span>Personal</span></button>
+    <button type="button" onClick={() => navigate('Documents')}><span className="finder-tag finder-tag--orange" /><span>Documents</span></button>
   </nav>;
 }
 
@@ -40,7 +41,7 @@ function FinderToolbar({ navigation, view, setView, query, setQuery }) {
       <button type="button" aria-label="Back" onClick={navigation.back} disabled={!navigation.canBack}><SystemGlyph name="chevronLeft" /></button>
       <button type="button" aria-label="Forward" onClick={navigation.forward} disabled={!navigation.canForward}><SystemGlyph name="chevronRight" /></button>
     </div>
-    <h2>{navigation.place === 'Home' ? personalInfo.name : navigation.place}</h2>
+    <h2>{navigation.place}</h2>
     <div className="finder-toolbar__views">
       <button type="button" aria-label="Icon view" aria-pressed={view === 'grid'} onClick={() => setView('grid')}><SystemGlyph name="grid" /></button>
       <button type="button" aria-label="List view" aria-pressed={view === 'list'} onClick={() => setView('list')}><SystemGlyph name="list" /></button>
@@ -73,13 +74,13 @@ export default function FinderApp({ payload, onLaunch }) {
   const files = finderItems.filter(file => (navigation.place === 'Recents' || file.locations.includes(navigation.place)) && file.name.toLowerCase().includes(query.toLowerCase()));
   const openFile = file => {
     if (file.place) { navigation.navigate(file.place); setSelected(null); setQuery(''); }
-    else if (file.app) onLaunch(file.app);
+    else if (file.app) onLaunch(file.app, file.payload);
     else if (file.url) window.open(file.url, '_blank', 'noopener,noreferrer');
   };
   return <div className="app-finder">
     <FinderSidebar place={navigation.place} navigate={place => { navigation.navigate(place); setQuery(''); setSelected(null); }} />
     <FinderToolbar navigation={navigation} view={view} setView={setView} query={query} setQuery={setQuery} />
     <FinderFiles files={files} selected={selected} setSelected={setSelected} openFile={openFile} view={view} />
-    <footer className="finder-status"><span><SystemGlyph name="home" />{personalInfo.name}<SystemGlyph name="chevronRight" />{navigation.place}</span><span>{files.length} items</span></footer>
+    <footer className="finder-status"><span><SystemGlyph name="home" />{HOME_NAME}<SystemGlyph name="chevronRight" />{navigation.place}</span><span>{files.length} items</span></footer>
   </div>;
 }

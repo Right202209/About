@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { DARK_THEME, LIGHT_THEME } from '../../hooks/useTheme';
-import { claudeBrand, personalInfo } from '../../info';
+import { macSpecs } from '../../content';
 import SystemGlyph from '../icons/SystemGlyph';
 
 const PANES = [{ name: 'Appearance', icon: 'sun' }, { name: 'Wallpaper', icon: 'desktop' }, { name: 'About', icon: 'info' }];
 const THEMES = [{ value: LIGHT_THEME, label: 'Light' }, { value: DARK_THEME, label: 'Dark' }];
-const ABOUT_ROWS = [{ label: 'Owner', value: personalInfo.name }, { label: 'Workspace', value: claudeBrand.cwd }, { label: 'Terminal', value: claudeBrand.app }, { label: 'Email', value: personalInfo.email }];
+const ABOUT_ROWS = [{ label: 'Name', value: 'Mac' }, ...macSpecs];
 
 function Appearance({ theme, onThemeChange }) {
   return <><h2>Appearance</h2><div className="settings-card"><div className="settings-appearance">
@@ -26,7 +26,7 @@ export default function SettingsApp({ theme, onThemeChange, brightness, onBright
   const [pane, setPane] = useState('Appearance');
   return <div className="app-settings">
     <nav className="settings-sidebar" aria-label="Settings categories">
-      <div className="settings-profile"><img src={`${process.env.PUBLIC_URL}/droit.jpg`} alt="" /><div><strong>{personalInfo.name}</strong><small>Personal account</small></div></div>
+      <div className="settings-profile"><span className="settings-avatar" aria-hidden="true"><SystemGlyph name="desktop" /></span><div><strong>Guest</strong><small>Local account</small></div></div>
       {PANES.map(item => <button key={item.name} type="button" className={pane === item.name ? 'is-selected' : ''} onClick={() => setPane(item.name)}><span className={`settings-sidebar__icon settings-sidebar__icon--${item.name.toLowerCase()}`}><SystemGlyph name={item.icon} /></span>{item.name}</button>)}
     </nav>
     <div className="settings-content">

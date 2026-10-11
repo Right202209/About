@@ -13,7 +13,7 @@ export default function AppWindow({ window, index, active, manager, children }) 
   useEffect(() => {
     const node = frame.ref.current;
     if (active && !minimized && !node?.contains(document.activeElement)) {
-      const target = node?.querySelector('.claude-terminal__input:not(:disabled)') || node;
+      const target = node?.querySelector('.terminal-app__input') || node;
       target?.focus({ preventScroll: true });
     }
   }, [active, minimized, window.focusVersion, frame.ref]);

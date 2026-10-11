@@ -10,7 +10,6 @@ import Spotlight from './components/Spotlight';
 import useDesktopShortcuts from './hooks/useDesktopShortcuts';
 import useTheme from './hooks/useTheme';
 import useWindowManager from './hooks/useWindowManager';
-import { personalInfo } from './info';
 
 const NOTICE_DURATION = 2600;
 
@@ -27,11 +26,7 @@ function useDesktopState() {
     const timeout = setTimeout(() => setNotice(''), NOTICE_DURATION);
     return () => clearTimeout(timeout);
   }, [notice]);
-  const copyEmail = async () => {
-    try { await navigator.clipboard.writeText(personalInfo.email); setNotice('Email address copied'); }
-    catch { setNotice(`Copy unavailable · ${personalInfo.email}`); }
-  };
-  return { searchOpen, setSearchOpen, openSearch, context, setContext, closeContext, brightness, setBrightness, selectionReset, setSelectionReset, notice, copyEmail };
+  return { searchOpen, setSearchOpen, openSearch, context, setContext, closeContext, brightness, setBrightness, selectionReset, setSelectionReset, notice, setNotice };
 }
 
 export default function App() {
@@ -52,7 +47,7 @@ export default function App() {
   };
   return <div className="desktop" onPointerDown={clearSelection} onContextMenu={contextMenu}>
     <DesktopBackground brightness={desktop.brightness} />
-    <MenuBar manager={manager} theme={theme} onToggleTheme={toggleTheme} onSearch={desktop.openSearch} brightness={desktop.brightness} onBrightness={desktop.setBrightness} onCopyEmail={desktop.copyEmail} />
+    <MenuBar manager={manager} theme={theme} onToggleTheme={toggleTheme} onSearch={desktop.openSearch} brightness={desktop.brightness} onBrightness={desktop.setBrightness} />
     <DesktopIcons onLaunch={manager.launch} onSelect={manager.blur} selectionReset={desktop.selectionReset} />
     <main className="desktop__content" aria-label="Application windows">
       {[...manager.windows].sort((a, b) => a.key.localeCompare(b.key)).map(window => <AppWindow key={window.key} window={window} index={manager.windows.findIndex(item => item.key === window.key)} active={manager.activeKey === window.key} manager={manager}>

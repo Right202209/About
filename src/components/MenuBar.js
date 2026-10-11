@@ -29,7 +29,7 @@ function useOpenMenu() {
 
 function MenuLeft({ menu, manager, items }) {
   const app = APP_INFO[manager.activeKey]?.label || 'Finder';
-  const names = manager.activeKey === 'claude' ? ['Shell', 'Edit', 'View', 'Window', 'Help'] : ['File', 'Edit', 'View', 'Go', 'Window', 'Help'];
+  const names = manager.activeKey === 'terminal' ? ['Shell', 'Edit', 'View', 'Window', 'Help'] : ['File', 'Edit', 'View', 'Go', 'Window', 'Help'];
   return <div className="desktop__menu-left">
     {['apple', 'app', ...names].map(name => <div className="menu__group" key={name} onPointerEnter={() => { if (menu.open && items[menu.open]) menu.setOpen(name); }}>
       <button type="button" data-menu={name} aria-haspopup="menu" aria-expanded={menu.open === name} aria-label={name === 'apple' ? 'Apple menu' : undefined}
@@ -62,10 +62,10 @@ function MenuRight({ menu, clock, onSearch, controlProps }) {
   </div>;
 }
 
-export default function MenuBar({ manager, theme, onToggleTheme, onSearch, brightness, onBrightness, onCopyEmail }) {
+export default function MenuBar({ manager, theme, onToggleTheme, onSearch, brightness, onBrightness }) {
   const menu = useOpenMenu();
   const clock = useMenuClock();
-  const items = getMenuItems({ manager, theme, onToggleTheme, onSearch, onCopyEmail });
+  const items = getMenuItems({ manager, theme, onToggleTheme, onSearch });
   items.Shell = items.File;
   const controlProps = { theme, brightness, onBrightness, onToggleTheme, onDesktop: manager.toggleDesktop, onSettings: () => manager.launch('settings') };
   return <header className="desktop__menu" ref={menu.ref}>

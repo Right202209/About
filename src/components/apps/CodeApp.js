@@ -1,19 +1,25 @@
-import { skills, personalInfo } from '../../info';
+import { sampleCode } from '../../content';
 import SystemGlyph from '../icons/SystemGlyph';
 
-const SKILL_PATTERN = /·\s+(.+)\s+(\d+)\/100/;
-const PARSED_SKILLS = skills.map(item => {
-  const match = item.content.match(SKILL_PATTERN);
-  return match ? { name: match[1], score: Number(match[2]) } : null;
-}).filter(Boolean).sort((a, b) => b.score - a.score);
+const TOKEN_PATTERN = /('[^']*'|`[^`]*`|\b(?:const|function|return)\b)/g;
+const KEYWORDS = ['const', 'function', 'return'];
+
+function highlight(line) {
+  return line.split(TOKEN_PATTERN).map((part, index) => {
+    if (KEYWORDS.includes(part)) return <span key={index} className="code-keyword">{part}</span>;
+    if (/^['`]/.test(part)) return <span key={index} className="code-string">{part}</span>;
+    return part;
+  });
+}
 
 export default function CodeApp() {
+  const { folder, file, language, lines } = sampleCode;
   return <div className="app-code">
     <aside className="code-activity" aria-hidden="true"><SystemGlyph name="document" /><SystemGlyph name="search" /><SystemGlyph name="code" /></aside>
-    <aside className="code-explorer"><p>EXPLORER</p><strong><SystemGlyph name="chevronDown" />{personalInfo.name.toUpperCase()}</strong><span><SystemGlyph name="code" />skills.json</span></aside>
-    <div className="code-editor"><div className="code-tab"><span>JSON</span>skills.json</div><div className="code-breadcrumb">{personalInfo.name}<SystemGlyph name="chevronRight" />skills.json</div>
-      <div className="code-lines"><div><i>1</i><code>{'{'}</code></div>{PARSED_SKILLS.map((skill, index) => <div key={skill.name}><i>{index + 2}</i><code>  <span className="code-key">"{skill.name}"</span>: <span className="code-number">{skill.score}</span>{index < PARSED_SKILLS.length - 1 ? ',' : ''}</code></div>)}<div><i>{PARSED_SKILLS.length + 2}</i><code>{'}'}</code></div></div>
+    <aside className="code-explorer"><p>EXPLORER</p><strong><SystemGlyph name="chevronDown" />{folder.toUpperCase()}</strong><span><SystemGlyph name="code" />{file}</span></aside>
+    <div className="code-editor"><div className="code-tab"><span>JS</span>{file}</div><div className="code-breadcrumb">{folder}<SystemGlyph name="chevronRight" />{file}</div>
+      <div className="code-lines">{lines.map((line, index) => <div key={index}><i>{index + 1}</i><code>{highlight(line)}</code></div>)}</div>
     </div>
-    <footer className="code-status"><span><SystemGlyph name="code" />main</span><span>UTF-8</span><span>JSON</span></footer>
+    <footer className="code-status"><span><SystemGlyph name="code" />main</span><span>UTF-8</span><span>{language}</span></footer>
   </div>;
 }

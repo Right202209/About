@@ -34,14 +34,6 @@ function Music() {
   </IconTile>;
 }
 
-function Claude() {
-  return <IconTile from="#f1ddc9" to="#e4c4a5">
-    <g stroke="#bc6949" strokeWidth="5.5" strokeLinecap="square">
-      {Array.from({ length: 12 }, (_, i) => <path key={i} d={`M64 ${i % 2 ? 30 : 26}v25`} transform={`rotate(${i * 30} 64 64)`} />)}
-    </g><circle cx="64" cy="64" r="14" fill="#bc6949" />
-  </IconTile>;
-}
-
 function Terminal() {
   return <IconTile from="#56585e" to="#252629">
     <rect x="16" y="20" width="96" height="87" rx="6" fill="#17191b" stroke="#86888c" strokeWidth="1.5" />
@@ -79,7 +71,7 @@ function Trash() {
   </>}</IconTile>;
 }
 
-const GLYPHS = { finder: Finder, safari: Safari, mail: Mail, music: Music, claude: Claude, terminal: Terminal, code: Code, settings: Settings, trash: Trash };
+const GLYPHS = { finder: Finder, safari: Safari, mail: Mail, music: Music, terminal: Terminal, code: Code, settings: Settings, trash: Trash };
 
 export default function DockGlyph({ type }) {
   const Glyph = GLYPHS[type] || Finder;

@@ -5,7 +5,7 @@ const DESKTOP_ICONS = [
   { key: 'drive', label: 'Macintosh HD', place: 'Home' },
   { key: 'projects', label: 'Projects', place: 'Projects' },
   { key: 'notes', label: 'Notes', place: 'Documents' },
-  { key: 'assets', label: 'Assets', place: 'Assets' }
+  { key: 'pictures', label: 'Pictures', place: 'Pictures' }
 ];
 
 export default function DesktopIcons({ onLaunch, onSelect, selectionReset }) {

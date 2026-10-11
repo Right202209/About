@@ -29,25 +29,10 @@
 .window-resize--se { bottom: -2px; right: -2px; cursor: nwse-resize; }
 .window-resize--sw { bottom: -2px; left: -2px; cursor: nesw-resize; }
 .window-resize--nw { top: -2px; left: -2px; cursor: nwse-resize; }
-.mac-window--claude { background: var(--terminal-bg); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); }
-.mac-window--claude .mac-window__body { overflow: hidden; }
-.claude-session { display: flex; flex-direction: column; flex: 1; min-height: 0; }
-.claude-banner { display: flex; align-items: center; flex: none; gap: 18px; padding: 24px 26px 16px; font-family: var(--font-mono); }
-.claude-banner__logo { width: 48px; height: 48px; flex-shrink: 0; image-rendering: pixelated; }
-.claude-banner__meta { min-width: 0; }
-.claude-banner__meta h1, .claude-banner__meta p { margin: 0; font-size: 12px; line-height: 1.75; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.claude-banner__app { color: var(--terminal-text); font-weight: 600; }
-.claude-banner__app span, .claude-banner__model span { color: var(--terminal-muted); font-weight: 400; }
-.claude-banner__model { color: var(--claude-orange); }
-.claude-banner__cwd { color: var(--terminal-muted); }
 @starting-style { .mac-window { opacity: 0; } }
 @container (max-width: 600px) {
   .mac-window__title { font-size: 11px; }
   .mac-window__titlebar { padding: 0 11px; }
   .mac-window__title .app-icon { display: none; }
   .mac-window__title-spacer { width: 16px; }
-  .claude-banner { padding: 20px 16px 12px; gap: 13px; }
-  .claude-banner__logo { width: 38px; height: 38px; }
-  .claude-banner__meta h1, .claude-banner__meta p { font-size: 11px; }
 }
-@media (max-height: 500px) { .claude-banner { display: none; } }

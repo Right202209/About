@@ -2,8 +2,8 @@ import { useCallback, useReducer } from 'react';
 import { isLaunchableApp } from '../components/apps/registry';
 
 export const INITIAL_DESKTOP = {
-  windows: [{ key: 'claude', minimized: false, maximized: false }],
-  activeKey: 'claude',
+  windows: [],
+  activeKey: null,
   hiddenWindows: []
 };
 

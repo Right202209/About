@@ -18,8 +18,7 @@
   --glass: rgba(239, 241, 241, .86);
   --glass-edge: rgba(255, 255, 255, .6);
   --window-shadow: 0 28px 60px rgba(0, 0, 0, .3), 0 0 0 1px rgba(0, 0, 0, .3), 0 1px 5px rgba(0, 0, 0, .2);
-  --claude-orange: #d99a79;
-  --claude-orange-bright: #e3ae91;
+  --terminal-prompt: #9fd38a;
   --terminal-bg: rgba(30, 30, 30, .96);
   --terminal-text: #e4e3df;
   --terminal-muted: #969591;

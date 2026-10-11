@@ -1,7 +1,8 @@
 .app-settings { flex: 1; min-height: 0; display: grid; grid-template-columns: 190px minmax(0, 1fr); }
 .settings-sidebar { padding: 12px 10px; background: var(--sidebar); border-right: 1px solid var(--separator); }
 .settings-profile { display: flex; align-items: center; gap: 10px; margin: 0 0 20px; padding: 8px 4px; }
-.settings-profile img { width: 40px; height: 40px; object-fit: cover; border-radius: 50%; }
+.settings-avatar { width: 40px; height: 40px; flex: none; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(#a9b0b8, #7d858e); color: #fff; }
+.settings-avatar .system-glyph { width: 20px; height: 20px; }
 .settings-profile strong { font-size: 15px; font-weight: 600; }
 .settings-profile small { display: block; margin-top: 4px; color: var(--text-secondary); font-size: 10px; }
 .settings-sidebar button { display: flex; gap: 8px; align-items: center; width: 100%; padding: 7px 8px; border: 0; border-radius: 5px; background: transparent; font-size: 12px; }

@@ -1,13 +1,12 @@
 # src/ — desktop UI
 
-The terminal has its own guide at `src/terminal/CLAUDE.md`.
-
-Personal content and Finder files live in `src/info.js`. System labels and app/menu registries may stay with their components.
+Neutral desktop content and Finder files live in `src/content.js`; no personal information anywhere. System labels and app/menu registries may stay with their components.
 
 - `App.js` composes the desktop, windows, Dock, menu bar, Spotlight, and context menu.
-- `hooks/useWindowManager.js` owns window order, focus, visibility, and zoom. Minimized windows remain mounted to preserve app and terminal state.
+- `hooks/useWindowManager.js` owns window order, focus, visibility, and zoom. The desktop starts with no window open. Minimized windows remain mounted to preserve app and terminal state.
 - `hooks/useWindowFrame.js` owns bounded pointer dragging, edge resizing, and viewport fitting.
 - `components/apps/registry.js` defines app labels, icons, and initial sizes. `components/apps/index.js` maps keys to content components.
+- `components/apps/TerminalApp.js` is a small zsh-style shell (help, ls, open, date, echo, clear, history).
 - `components/apps/AppWindow.js` supplies shared native chrome and window controls.
 - `components/icons/` contains SVG artwork. Every icon instance uses unique React `useId` prefixes for gradients and clipping.
 - `DesktopBackground` uses the existing local wallpaper through `process.env.PUBLIC_URL`.

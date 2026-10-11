@@ -11,12 +11,12 @@ The working directory may be checked out on `gh-pages`. Check `git branch` befor
 
 ## What this is
 
-A terminal-style personal portfolio page ("About Me" for Droit), rendered inside a macOS-like desktop UI (menu bar, dock, desktop icons) built in React. The terminal is a custom React 18 component (`src/terminal/`) that simulates a Claude Code CLI session — typed output, tool-call boxes (`Read`/`Grep`/`Bash`/`WebSearch`), y/N permission prompts, token/context usage lines — and boots with the `intro` command. Published to GitHub Pages at `https://right202209.github.io/About`.
+A plain macOS-style web desktop (menu bar, Dock, desktop icons, Finder, Spotlight, draggable windows) built in React. It deliberately shows **no personal information**: no name, email, avatar, contacts, or portfolio content. The desktop opens empty; Terminal is a small zsh-style shell (`src/components/apps/TerminalApp.js`). Published to GitHub Pages at `https://right202209.github.io/About`.
 
 ## Commands
 
 ```bash
-npm install      # may hit a React 18 peer conflict with react-terminal-app; use --legacy-peer-deps if so
+npm install --legacy-peer-deps
 npm start        # dev server at http://localhost:3000
 npm run build    # production build into build/
 npm test         # react-scripts test (watch mode)
@@ -25,21 +25,17 @@ npm run deploy   # manual deploy: builds and pushes build/ to gh-pages branch
 
 Deployment is normally automatic: `.github/workflows/static.yml` builds on every push to `main` and publishes via GitHub's artifact-based Pages deploy (`upload-pages-artifact`/`deploy-pages`) — this does **not** touch the `gh-pages` branch. `npm run deploy` (gh-pages package) is the manual/legacy path that pushes `build/` to the `gh-pages` branch, so that branch can be stale relative to the live site.
 
-Note: the branch `fix/react18-terminal-peer-conflict` (unmerged) was the first pass at replacing `react-terminal-app`; `main` now ships its own custom terminal under `src/terminal/`, superseding it.
-
 ### Tooling notes
 
-- **Package manager is npm** (CI runs `npm ci --legacy-peer-deps` on Node 20). A `yarn.lock` is also checked in but unused — don't install with yarn.
-- **`react-terminal-app` is no longer used at runtime** (the custom terminal replaced it) but is still listed in `package.json`, so installs may still hit the React 18 peer conflict — use `--legacy-peer-deps`. Removing the dependency (and regenerating the lockfile) is a safe future cleanup.
+- **Package manager is npm** (CI runs `npm ci --legacy-peer-deps` on Node 20). Don't install with yarn.
 - **The root `webpack.config.js` is stale and unused** (and broken: missing `HtmlWebpackPlugin` import, duplicate `mode` key, points at a non-existent `src/index.html`). The real build is Create React App / `react-scripts`; ignore this file.
 - **Window regression tests** live in `src/hooks/useWindowManager.test.js` and `useWindowFrame.test.js`. Run `CI=true npm test -- --watchAll=false --runInBand` for a non-interactive check.
 - `homepage` in `package.json` is `/About` (capital A) and must match the repo-path casing, or built asset URLs 404 on Pages (this was a recent fix).
 
 ## Architecture (on `main`)
 
-All portfolio content lives in `src/info.js` — content changes happen there, never in components. Code hard limits: files ≤ 300 lines, functions ≤ 50, no magic numbers.
+Desktop content (Finder files, Safari favorites, sample code, About This Mac rows) lives in `src/content.js` — content changes happen there, never in components. Keep it neutral: never add personal details. Code hard limits: files ≤ 300 lines, functions ≤ 50, no magic numbers.
 
 Detailed guides live next to the code (loaded automatically when working in those paths):
 
 - `src/CLAUDE.md` — desktop UI: components, icons, hooks, styles
-- `src/terminal/CLAUDE.md` — the simulated CLI: engine, commands, how to add a command
