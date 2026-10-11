@@ -6,6 +6,17 @@ import MenuDropdown from './MenuDropdown';
 import getMenuItems from './menuItems';
 import ControlCenter from './ControlCenter';
 import CalendarPanel from './CalendarPanel';
+import useMusic from '../hooks/useMusic';
+
+const DEFAULT_MENUS = ['File', 'Edit', 'View', 'Go', 'Window', 'Help'];
+const APP_MENUS = {
+  terminal: ['Shell', 'Edit', 'View', 'Window', 'Help'],
+  safari: ['File', 'Edit', 'View', 'History', 'Bookmarks', 'Window', 'Help'],
+  music: ['File', 'Edit', 'Song', 'View', 'Controls', 'Window', 'Help'],
+  code: ['File', 'Edit', 'Selection', 'View', 'Go', 'Run', 'Terminal', 'Window', 'Help'],
+  notes: ['File', 'Edit', 'Format', 'View', 'Window', 'Help'],
+  calculator: ['File', 'Edit', 'View', 'Convert', 'Window', 'Help']
+};
 
 function useOpenMenu() {
   const ref = useRef(null);
@@ -29,7 +40,7 @@ function useOpenMenu() {
 
 function MenuLeft({ menu, manager, items }) {
   const app = APP_INFO[manager.activeKey]?.label || 'Finder';
-  const names = manager.activeKey === 'terminal' ? ['Shell', 'Edit', 'View', 'Window', 'Help'] : ['File', 'Edit', 'View', 'Go', 'Window', 'Help'];
+  const names = APP_MENUS[manager.activeKey] || DEFAULT_MENUS;
   return <div className="desktop__menu-left">
     {['apple', 'app', ...names].map(name => <div className="menu__group" key={name} onPointerEnter={() => { if (menu.open && items[menu.open]) menu.setOpen(name); }}>
       <button type="button" data-menu={name} aria-haspopup="menu" aria-expanded={menu.open === name} aria-label={name === 'apple' ? 'Apple menu' : undefined}
@@ -38,7 +49,7 @@ function MenuLeft({ menu, manager, items }) {
         onKeyDown={event => { if (event.key === 'ArrowDown') { event.preventDefault(); menu.setOpen(name); } }}>
         {name === 'apple' ? <SystemGlyph name="apple" /> : <span>{name === 'app' ? app : name}</span>}
       </button>
-      {menu.open === name && <MenuDropdown label={name === 'app' ? app : name} items={items[name]} onClose={menu.close} />}
+      {menu.open === name && <MenuDropdown label={name === 'app' ? app : name} items={items[name] || items.fallback} onClose={menu.close} />}
     </div>)}
   </div>;
 }
@@ -62,12 +73,12 @@ function MenuRight({ menu, clock, onSearch, controlProps }) {
   </div>;
 }
 
-export default function MenuBar({ manager, theme, onToggleTheme, onSearch, brightness, onBrightness }) {
+export default function MenuBar({ manager, theme, onToggleTheme, onSearch, brightness, onBrightness, onMission, onLaunchpad }) {
   const menu = useOpenMenu();
   const clock = useMenuClock();
-  const items = getMenuItems({ manager, theme, onToggleTheme, onSearch });
-  items.Shell = items.File;
-  const controlProps = { theme, brightness, onBrightness, onToggleTheme, onDesktop: manager.toggleDesktop, onSettings: () => manager.launch('settings') };
+  const music = useMusic();
+  const items = getMenuItems({ manager, theme, onToggleTheme, onSearch, onMission, onLaunchpad, music });
+  const controlProps = { theme, brightness, onBrightness, onToggleTheme, onDesktop: manager.toggleDesktop, onSettings: () => manager.launch('settings'), onMusic: () => manager.launch('music') };
   return <header className="desktop__menu" ref={menu.ref}>
     <MenuLeft menu={menu} manager={manager} items={items} />
     <MenuRight menu={menu} clock={clock} onSearch={onSearch} controlProps={controlProps} />

@@ -1,14 +1,16 @@
 import AboutApp from './AboutApp';
-import CodeApp from './CodeApp';
+import CalculatorApp from './CalculatorApp';
+import CodeApp from './code/CodeApp';
 import FinderApp from './FinderApp';
 import MailApp from './MailApp';
-import MusicApp from './MusicApp';
-import SafariApp from './SafariApp';
+import MusicApp from './music/MusicApp';
+import NotesApp from './NotesApp';
+import SafariApp from './safari/SafariApp';
 import SettingsApp from './SettingsApp';
 import TerminalApp from './TerminalApp';
 import TrashApp from './TrashApp';
 
-const COMPONENTS = { terminal: TerminalApp, finder: FinderApp, safari: SafariApp, mail: MailApp, music: MusicApp, code: CodeApp, settings: SettingsApp, trash: TrashApp, about: AboutApp };
+const COMPONENTS = { terminal: TerminalApp, finder: FinderApp, safari: SafariApp, mail: MailApp, music: MusicApp, notes: NotesApp, calculator: CalculatorApp, code: CodeApp, settings: SettingsApp, trash: TrashApp, about: AboutApp };
 
 export { isLaunchableApp } from './registry';
 

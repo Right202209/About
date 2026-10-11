@@ -1,0 +1,47 @@
+.app-safari { display: flex; flex-direction: column; flex: 1; min-height: 0; background: var(--surface); }
+.safari-toolbar { display: flex; align-items: center; gap: 14px; height: 52px; flex: none; padding: 0 14px 0 18px; background: var(--chrome); border-bottom: 1px solid var(--separator); color: var(--text-secondary); }
+.safari-nav, .safari-actions { display: flex; gap: 4px; }
+.safari-nav button, .safari-actions button { display: grid; place-items: center; width: 28px; height: 26px; padding: 0; border: 0; border-radius: 6px; background: transparent; color: var(--text-secondary); }
+.safari-nav button:hover:not(:disabled), .safari-actions button:hover:not(:disabled) { background: var(--selection-muted); }
+.safari-nav .system-glyph, .safari-actions .system-glyph { width: 17px; height: 17px; }
+.safari-address { position: relative; flex: 1; max-width: 560px; margin: 0 auto; display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 6px 0 10px; border-radius: 8px; background: var(--surface-muted); border: 1px solid transparent; overflow: hidden; }
+[data-theme="dark"] .safari-address { background: #2a2a2c; }
+.safari-address.is-editing { background: var(--surface); border-color: #0a84ff; box-shadow: 0 0 0 3px #0a84ff40; }
+.safari-address input { flex: 1; min-width: 0; height: 100%; background: transparent; border: 0; outline: 0; color: var(--text-primary); font-size: 13px; text-align: center; }
+.safari-address.is-editing input { text-align: left; }
+.safari-address > .system-glyph { width: 12px; height: 12px; }
+.safari-address .safari-address__reload { display: grid; place-items: center; width: 22px; height: 22px; padding: 0; border: 0; border-radius: 5px; background: transparent; color: var(--text-secondary); }
+.safari-address .safari-address__reload:hover { background: var(--selection-muted); }
+.safari-address .safari-address__reload .system-glyph { width: 13px; height: 13px; }
+.safari-progress { position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: linear-gradient(90deg, #0a84ff, #5ac8fa); transform-origin: left; animation: safari-progress 2.4s cubic-bezier(.1, .7, .2, 1) forwards; }
+@keyframes safari-progress { from { transform: scaleX(.05); } to { transform: scaleX(.9); } }
+.safari-tabs { display: flex; flex: none; height: 30px; background: var(--chrome); border-bottom: 1px solid var(--separator); }
+.safari-tab { position: relative; flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center; padding: 0 28px; font-size: 12px; color: var(--text-secondary); border-right: 1px solid var(--separator); background: rgba(0, 0, 0, .04); }
+.safari-tab span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.safari-tab.is-active { background: var(--surface); color: var(--text-primary); }
+.safari-tab__close { position: absolute; left: 6px; display: grid; place-items: center; width: 18px; height: 18px; padding: 0; border: 0; border-radius: 4px; background: transparent; opacity: 0; color: inherit; }
+.safari-tab:hover .safari-tab__close { opacity: 1; }
+.safari-tab__close:hover { background: var(--selection-muted); }
+.safari-tab__close .system-glyph { width: 10px; height: 10px; stroke-width: 2.4; }
+.safari-pages { position: relative; flex: 1; min-height: 0; }
+.safari-page { position: absolute; inset: 0; overflow: auto; background: var(--surface); }
+.safari-frame { width: 100%; height: 100%; border: 0; display: block; background: #fff; }
+.safari-start { min-height: 100%; padding: 56px max(40px, 8%); background: linear-gradient(160deg, #f6f6f8, #ececf0); }
+[data-theme="dark"] .safari-start { background: linear-gradient(160deg, #2b2b2e, #1f1f22); }
+.safari-start h2 { margin: 0 0 22px; font-size: 22px; letter-spacing: -.5px; }
+.safari-favorites { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 24px 16px; }
+.safari-favorite { display: flex; flex-direction: column; align-items: center; gap: 9px; padding: 0; border: 0; background: none; font-size: 11px; color: var(--text-primary); }
+.safari-favorite__icon { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 15px; color: #fff; font-size: 28px; font-weight: 700; box-shadow: 0 3px 10px rgba(0, 0, 0, .15); transition: transform 120ms; }
+.safari-favorite:hover .safari-favorite__icon { transform: translateY(-2px); }
+.safari-privacy { display: flex; align-items: center; gap: 16px; margin-top: 44px; padding: 16px 18px; background: var(--surface); border: 1px solid var(--separator); border-radius: 12px; font-size: 12px; }
+.safari-privacy > .system-glyph { width: 24px; height: 24px; color: var(--text-secondary); }
+.safari-privacy p { color: var(--text-secondary); margin: 4px 0 0; font-size: 11px; }
+.safari-blocked { min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 32px; text-align: center; background: var(--surface-muted); }
+.safari-blocked > .system-glyph { width: 52px; height: 52px; color: var(--text-secondary); stroke-width: 1.2; }
+.safari-blocked h2 { margin: 6px 0 0; font-size: 20px; }
+.safari-blocked p { margin: 0 0 10px; color: var(--text-secondary); font-size: 13px; }
+@container (max-width: 600px) {
+  .safari-toolbar { gap: 6px; padding: 0 8px 0 12px; }
+  .safari-nav button:last-child, .safari-actions button:first-child { display: none; }
+  .safari-start { padding: 32px 20px; }
+}

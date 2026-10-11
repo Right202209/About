@@ -71,7 +71,33 @@ function Trash() {
   </>}</IconTile>;
 }
 
-const GLYPHS = { finder: Finder, safari: Safari, mail: Mail, music: Music, terminal: Terminal, code: Code, settings: Settings, trash: Trash };
+
+function Launchpad() {
+  const colors = ['#ff5f57', '#febc2e', '#28c840', '#0a84ff', '#bf5af2', '#ff9f0a', '#64d2ff', '#ff375f', '#30d158'];
+  return <IconTile from="#5b5f66" to="#2a2c31">
+    {colors.map((color, index) => <rect key={color} x={27 + (index % 3) * 27} y={27 + Math.floor(index / 3) * 27} width="20" height="20" rx="6" fill={color} />)}
+  </IconTile>;
+}
+
+function Notes() {
+  return <IconTile from="#fff" to="#f2f2f2">{id => <>
+    <path d="M8 40C8 18 18 8 40 8h48c22 0 32 10 32 32v4H8v-4Z" fill="#ffd52e" clipPath={`url(#${id}-clip)`} />
+    <path d="M8 40h112v4H8z" fill="#e6b800" />
+    <g stroke="#d7d7d7" strokeWidth="2">{[62, 78, 94, 110].map(y => <path key={y} d={`M14 ${y}h100`} />)}</g>
+    <g fill="#b9b9b9">{[20, 32, 44, 56, 68, 80, 92, 104].map(x => <circle key={x} cx={x} cy="51" r="1.6" />)}</g>
+  </>}</IconTile>;
+}
+
+function Calculator() {
+  const keys = ['#a5a5a5', '#a5a5a5', '#ff9f0a', '#333', '#333', '#ff9f0a', '#333', '#333', '#ff9f0a'];
+  return <IconTile from="#4a4a4c" to="#1c1c1e">
+    <rect x="26" y="20" width="76" height="22" rx="5" fill="#0f0f10" />
+    <path d="M76 31h18" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
+    {keys.map((color, index) => <circle key={index} cx={38 + (index % 3) * 26} cy={60 + Math.floor(index / 3) * 22} r="9" fill={color} />)}
+  </IconTile>;
+}
+
+const GLYPHS = { finder: Finder, safari: Safari, mail: Mail, music: Music, terminal: Terminal, code: Code, settings: Settings, trash: Trash, launchpad: Launchpad, notes: Notes, calculator: Calculator };
 
 export default function DockGlyph({ type }) {
   const Glyph = GLYPHS[type] || Finder;

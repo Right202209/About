@@ -5,4 +5,4 @@
 .desktop__content { position: absolute; inset: calc(var(--menu-height) + var(--menu-safe-top)) 0 calc(var(--dock-reserve) + var(--dock-safe-bottom)); z-index: 5; pointer-events: none; }
 .desktop__show { position: absolute; bottom: 0; right: 0; width: 8px; height: 100%; padding: 0; border: 0; background: transparent; z-index: 30; }
 .desktop__show:hover, .desktop__show:focus-visible { background: rgba(255, 255, 255, .14); }
-.desktop__hint { position: absolute; left: 50%; bottom: calc(var(--dock-reserve) + 18px); transform: translateX(-50%); padding: 8px 16px; border: 1px solid rgba(255, 255, 255, .18); border-radius: 8px; color: #fff; background: rgba(24, 30, 26, .45); backdrop-filter: blur(20px); font-size: 12px; text-shadow: 0 1px 2px #0008; pointer-events: none; white-space: nowrap; }
+.desktop__hint { position: absolute; left: 50%; bottom: calc(var(--dock-reserve) + 72px); transform: translateX(-50%); padding: 8px 16px; border: 1px solid rgba(255, 255, 255, .18); border-radius: 8px; color: #fff; background: rgba(24, 30, 26, .45); backdrop-filter: blur(20px); font-size: 12px; text-shadow: 0 1px 2px #0008; pointer-events: none; white-space: nowrap; }

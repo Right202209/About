@@ -13,3 +13,8 @@
 @import './styles/settings.css';
 @import './styles/app-pages.css';
 @import './styles/terminal.css';
+@import './styles/safari.css';
+@import './styles/music.css';
+@import './styles/code.css';
+@import './styles/notes-calculator.css';
+@import './styles/launchpad.css';

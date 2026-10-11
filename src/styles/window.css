@@ -36,3 +36,18 @@
   .mac-window__title .app-icon { display: none; }
   .mac-window__title-spacer { width: 16px; }
 }
+/* Unified-toolbar apps draw their own traffic lights inside the toolbar. */
+.mac-window.is-chromeless .mac-window__body { border-radius: 9px; }
+.mac-window.is-chromeless .window-controls { position: relative; z-index: 1; }
+.mac-window.is-animating { pointer-events: none; will-change: transform, opacity; }
+.window-control:disabled { opacity: 1; background: #c7c7c7 !important; }
+[data-theme="dark"] .window-control:disabled { background: #606062 !important; }
+/* Mission Control */
+.desktop__content .mac-window { transition: opacity 140ms ease-out, transform 360ms cubic-bezier(.3, .7, .2, 1); transform-origin: center; }
+.desktop__content.is-mission .mac-window { cursor: pointer; }
+.desktop__content.is-mission .mac-window > * { pointer-events: none; }
+.desktop__content.is-mission .mac-window:hover { outline: 4px solid #1a82fbcc; outline-offset: 3px; }
+.desktop.is-mission .desktop__wallpaper img { filter: brightness(.55) blur(6px); transform: scale(1.03); transition: filter 300ms, transform 300ms; }
+.desktop.is-mission .desktop__icons { opacity: 0; pointer-events: none; }
+.desktop__hint--mission { bottom: 50%; }
+.desktop__content:has(.is-animating) { z-index: 45; }

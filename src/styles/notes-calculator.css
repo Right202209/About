@@ -1,0 +1,36 @@
+/* Notes */
+.app-notes { flex: 1; min-height: 0; display: grid; grid-template-columns: 240px minmax(0, 1fr); background: var(--surface); }
+.notes-list { display: flex; flex-direction: column; min-width: 0; overflow: auto; background: var(--sidebar); border-right: 1px solid var(--separator); }
+.notes-list__top { flex: none; height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 12px 0 18px; }
+.notes-list__top > button, .notes-editor__bar button { display: grid; place-items: center; width: 28px; height: 26px; padding: 0; border: 0; border-radius: 6px; background: none; color: var(--text-secondary); }
+.notes-list__top > button:hover:not(:disabled), .notes-editor__bar button:hover { background: var(--selection-muted); }
+.notes-list__top > button .system-glyph, .notes-editor__bar .system-glyph { width: 17px; height: 17px; }
+.notes-search { display: flex; align-items: center; gap: 6px; height: 28px; margin: 0 10px 8px; padding: 0 8px; border-radius: 7px; background: var(--selection-muted); color: var(--text-secondary); }
+.notes-search .system-glyph { width: 13px; height: 13px; }
+.notes-search input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; color: var(--text-primary); font-size: 13px; }
+.notes-list__group { margin: 6px 20px 6px; font-size: 11px; font-weight: 700; color: var(--text-secondary); }
+.notes-item { display: flex; flex-direction: column; gap: 3px; margin: 0 10px; padding: 9px 12px; border: 0; border-radius: 7px; background: none; text-align: left; border-bottom: 1px solid var(--separator); }
+.notes-item strong { font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.notes-item span { font-size: 12px; color: var(--text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.notes-item b { color: var(--text-primary); font-weight: 500; }
+.notes-item.is-selected { background: #ffd52e; border-color: transparent; }
+.notes-item.is-selected strong, .notes-item.is-selected span, .notes-item.is-selected b { color: #1d1d1f; }
+.notes-editor { display: flex; flex-direction: column; min-width: 0; }
+.notes-editor__bar { flex: none; height: 52px; display: flex; align-items: center; justify-content: flex-end; padding: 0 14px; border-bottom: 1px solid var(--separator); }
+.notes-editor textarea { flex: 1; resize: none; border: 0; outline: 0; padding: 18px 26px; background: var(--surface); color: var(--text-primary); font: 14px/1.6 var(--font-system); }
+.notes-editor textarea::first-line { font-size: 22px; font-weight: 700; }
+@container (max-width: 560px) { .app-notes { grid-template-columns: 160px minmax(0, 1fr); } .notes-editor textarea { padding: 14px; } }
+/* Calculator */
+.app-calculator { flex: 1; display: flex; flex-direction: column; padding: 0 1px 1px; background: #2d2c2e; outline: 0; user-select: none; }
+.calculator-top { height: 30px; display: flex; align-items: center; padding: 0 9px; }
+.calculator-display { display: block; padding: 6px 16px 4px; overflow: hidden; color: #fff; font-size: 52px; font-weight: 300; line-height: 1.1; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.calculator-display.is-small { font-size: 36px; padding-top: 18px; }
+.calculator-keys { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; }
+.calculator-key { border: 0; padding: 0; font-size: 22px; color: #fff; background: #605f61; }
+.calculator-key--fn { background: #474648; font-size: 18px; }
+.calculator-key--op { background: #f19c2b; font-size: 26px; }
+.calculator-key--wide { grid-column: span 2; text-align: left; padding-left: 22px; }
+.calculator-key:active { filter: brightness(1.35); }
+.calculator-key.is-armed { background: #fdd9a6; color: #f19c2b; }
+.mac-window--calculator { border-color: rgba(255, 255, 255, .2); }
+.mac-window--calculator .mac-window__body { background: #2d2c2e; overflow: hidden; }

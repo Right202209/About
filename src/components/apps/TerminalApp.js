@@ -6,7 +6,8 @@ const FOLDERS = ['Desktop', 'Documents', 'Downloads', 'Pictures', 'Projects'];
 const HELP = [
   'help            show this list',
   'ls              list folders',
-  'open <app>      open an app (finder, safari, mail, music, code, settings)',
+  'open <app>      open an app (finder, safari, music, notes, calculator, code…)',
+  'open <url>      open a website in Safari',
   'date            print the date and time',
   'echo <text>     print text',
   'whoami / pwd / uname',
@@ -30,6 +31,7 @@ function run(input, onLaunch) {
   if (command === 'echo') return [rest];
   if (command === 'open') {
     const key = rest.toLowerCase();
+    if (/^https?:\/\//.test(rest) || /^[\w.-]+\.(com|org|net|io|dev|so|ch|co|app|cn)(\/\S*)?$/i.test(rest)) { onLaunch('safari', { url: /^https?:/.test(rest) ? rest : `https://${rest}` }); return []; }
     if (APP_INFO[key] && key !== 'terminal') { onLaunch(key); return []; }
     return [`open: unable to find application named '${rest}'`];
   }

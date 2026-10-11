@@ -6,7 +6,13 @@ Neutral desktop content and Finder files live in `src/content.js`; no personal i
 - `hooks/useWindowManager.js` owns window order, focus, visibility, and zoom. The desktop starts with no window open. Minimized windows remain mounted to preserve app and terminal state.
 - `hooks/useWindowFrame.js` owns bounded pointer dragging, edge resizing, and viewport fitting.
 - `components/apps/registry.js` defines app labels, icons, and initial sizes. `components/apps/index.js` maps keys to content components.
-- `components/apps/TerminalApp.js` is a small zsh-style shell (help, ls, open, date, echo, clear, history).
+- `components/apps/TerminalApp.js` is a small zsh-style shell (help, ls, open <app|url>, date, echo, clear, history).
+- `components/Dock.js` + `components/dock/magnify.js`: dockbar's sine magnification computed from resting slot positions; slots grow in real width. Minimized windows get `data-dock-minimized` slots that `hooks/useMinimizeAnimation.js` animates into.
+- Unified-toolbar apps (`chromeless` in the registry: Safari, Music, Notes, Calculator) render `<TrafficLights />` from `apps/WindowChrome.js` and mark drag areas with `data-window-drag`.
+- `apps/safari/`: tabs with per-tab history, iframes for sites that allow framing; hosts that refuse framing are listed in `content.js` (`safariBlockedHosts`).
+- `apps/music/` + `hooks/useMusic.js`: one desktop-wide audio player (MusicProvider in App.js) so playback survives closing the window; Control Center and the Controls menu read it too.
+- `apps/code/`: textarea over a highlighted <pre>, files in localStorage (`code-workspace`), JS runs in a sandboxed iframe, HTML previews inline linked CSS/JS.
+- `Launchpad.js` and `hooks/useMissionControl.js` are the full-screen app grid and the window overview.
 - `components/apps/AppWindow.js` supplies shared native chrome and window controls.
 - `components/icons/` contains SVG artwork. Every icon instance uses unique React `useId` prefixes for gradients and clipping.
 - `DesktopBackground` uses the existing local wallpaper through `process.env.PUBLIC_URL`.

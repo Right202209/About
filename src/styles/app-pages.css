@@ -1,25 +1,3 @@
-/* Safari */
-.app-safari { display: flex; flex-direction: column; flex: 1; min-height: 0; background: var(--surface-muted); }
-.safari-toolbar { display: flex; align-items: center; gap: 25px; padding: 8px 18px; background: var(--chrome); border-bottom: 1px solid var(--separator); color: var(--text-secondary); }
-.safari-address { display: flex; align-items: center; gap: 7px; width: 70%; height: 29px; margin: auto; padding: 0 9px; border-radius: 6px; background: var(--surface); border: 1px solid var(--separator); box-shadow: 0 1px 2px #00000005; }
-.safari-address input { width: 100%; background: transparent; border: 0; outline: 0; color: var(--text-primary); font-size: 11px; text-align: center; }
-.safari-address .system-glyph { width: 12px; height: 12px; }
-.safari-address button, .safari-home { border: 0; background: transparent; padding: 3px; }
-.safari-start { padding: 45px 50px; flex: 1; overflow: auto; }
-.safari-start h2 { margin: 0 0 25px; font-size: 25px; letter-spacing: -.7px; }
-.safari-favorites { display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; }
-.safari-favorite { color: inherit; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 10px; font-size: 11px; }
-.safari-favorite__icon { display: grid; place-items: center; width: 60px; height: 60px; border-radius: 13px; background: #fff; box-shadow: 0 3px 7px #0001; color: #1685de; }
-.safari-favorite__icon .system-glyph { width: 30px; height: 30px; stroke-width: 1.7; }
-.safari-favorite__icon--github, .safari-favorite__icon--twitter { color: #fff; background: #25272c; }
-.safari-favorite__icon--game { color: #fff; background: #deaa64; }
-.safari-favorite__icon--document { color: #fff; background: #5a97d9; }
-.safari-favorite:hover .safari-favorite__icon { box-shadow: 0 4px 12px #0002; }
-.safari-privacy { display: flex; align-items: center; gap: 18px; margin-top: 42px; padding: 18px; background: var(--surface); border: 1px solid var(--separator); border-radius: 10px; font-size: 12px; }
-.safari-privacy > .system-glyph { width: 25px; height: 25px; color: var(--text-secondary); }
-.safari-privacy p { color: var(--text-secondary); margin: 6px 0 0; font-size: 11px; }
-.safari-footer { padding: 12px; color: var(--text-secondary); font-size: 10px; text-align: center; }
-.safari-error { color: #db4c4c; font-size: 12px; }
 /* Shared empty state */
 .app-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 48px 16px; text-align: center; color: var(--text-secondary); }
 .app-empty > .system-glyph { width: 38px; height: 38px; stroke-width: 1.4; }
@@ -37,50 +15,6 @@
 .mail-heading { display: flex; align-items: center; justify-content: space-between; }
 .mail-heading h2 { margin: 0; font-size: 23px; }
 .mail-compose { color: var(--selection); padding: 5px; }
-/* Music */
-.app-music { display: grid; grid-template-columns: 164px minmax(0, 1fr); flex: 1; min-height: 0; background: var(--surface); }
-.music-sidebar { background: var(--sidebar); border-right: 1px solid var(--separator); padding: 22px 10px; }
-.music-sidebar > p { margin: 0 9px 10px; font-size: 11px; font-weight: 600; color: var(--text-secondary); }
-.music-sidebar > span { display: flex; align-items: center; gap: 7px; padding: 8px; margin-bottom: 5px; border-radius: 5px; font-size: 11px; }
-.music-sidebar .is-selected { background: var(--selection-muted); }
-.music-sidebar .system-glyph { width: 17px; height: 17px; color: #e75871; }
-.music-content { padding: 28px; overflow: auto; }
-.music-hero { display: flex; gap: 20px; align-items: center; margin-bottom: 28px; }
-.music-cover { width: 132px; height: 132px; flex: none; display: grid; place-items: center; background: linear-gradient(145deg, #fda4a3, #df4365); border-radius: 8px; box-shadow: 0 5px 10px #be33542b; color: #fff; }
-.music-cover .system-glyph { width: 62px; height: 62px; stroke-width: 1.5; }
-.music-hero small { font-size: 9px; font-weight: 600; color: #dc5068; }
-.music-hero h2 { margin: 8px 0; font-size: 23px; line-height: 1.15; }
-.music-hero p { margin: 0 0 8px; color: #dc5068; font-size: 12px; }
-.music-hero > div > span { color: var(--text-secondary); font-size: 10px; }
-/* Code */
-.app-code { flex: 1; min-height: 0; display: grid; grid-template-columns: 42px 145px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) 23px; background: #1e1e1e; color: #d4d4d4; font-family: var(--font-mono); }
-.code-activity { padding-top: 16px; display: flex; align-items: center; flex-direction: column; gap: 24px; background: #333; color: #aeb1b4; }
-.code-activity > .system-glyph { width: 23px; height: 23px; }.code-activity > .system-glyph:first-child { color: #fff; }
-.code-explorer { background: #252526; font-family: var(--font-system); font-size: 11px; }
-.code-explorer p { font-size: 10px; margin: 15px 15px 23px; color: #bbb; }
-.code-explorer strong, .code-explorer span { display: flex; align-items: center; gap: 6px; padding: 6px 9px; font-size: 10px; }
-.code-explorer span { background: #37373d; padding-left: 19px; }
-.code-explorer .system-glyph { width: 13px; height: 13px; }.code-explorer span .system-glyph { color: #d9bd72; }
-.code-editor { min-width: 0; min-height: 0; overflow: auto; font-size: 12px; }
-.code-tab { padding: 10px 18px; display: flex; gap: 12px; width: fit-content; background: #1e1e1e; border-top: 1px solid #42a5ed; font-family: var(--font-system); }
-.code-tab span { color: #d6ba7c; font-size: 9px; }
-.code-breadcrumb { display: flex; gap: 7px; align-items: center; padding: 8px 18px; font-family: var(--font-system); color: #96989e; font-size: 10px; }.code-breadcrumb .system-glyph { width: 11px; height: 11px; }
-.code-lines { padding: 8px 0 18px; line-height: 1.85; }
-.code-lines > div { display: flex; white-space: pre; }
-.code-lines i { width: 42px; text-align: right; padding-right: 18px; color: #737373; flex: none; font-style: normal; font-size: 11px; }
-.code-lines code { font: inherit; }
-.code-keyword { color: #569cd6; }.code-string { color: #ce9178; }
-.code-status { grid-column: 1 / -1; display: flex; align-items: center; gap: 15px; padding: 0 12px; color: white; background: #007acc; font-size: 10px; }
-.code-status > span { display: flex; gap: 6px; align-items: center; }.code-status > span:first-child { margin-right: auto; }.code-status .system-glyph { width: 13px; height: 13px; }
 @container (max-width: 600px) {
-  .safari-toolbar { gap: 9px; padding: 8px 10px; }
-  .safari-address { width: 85%; }
-  .safari-start { padding: 30px 22px; }
-  .safari-favorites { grid-template-columns: repeat(3, 1fr); gap: 22px 12px; }
-  .safari-favorite__icon { width: 54px; height: 54px; }
-  .safari-privacy { margin-top: 28px; }
   .app-mail { grid-template-columns: minmax(0, 1fr); }.mail-sidebar { display: none; }.mail-content { padding: 22px; }
-  .app-music { grid-template-columns: minmax(0, 1fr); }.music-sidebar { display: none; }.music-content { padding: 22px 16px; }
-  .music-cover { width: 105px; height: 105px; }.music-hero { gap: 17px; }.music-hero h2 { font-size: 22px; }
-  .app-code { grid-template-columns: 35px minmax(0, 1fr); }.code-explorer { display: none; }.code-editor { font-size: 11px; }
 }
