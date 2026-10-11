@@ -1,12 +1,19 @@
 # src/ — desktop UI
 
-Scope: this file covers the desktop chrome under `src/`; the terminal has its own guide at `src/terminal/CLAUDE.md`.
+The terminal has its own guide at `src/terminal/CLAUDE.md`.
 
-All displayed content comes from `src/info.js` (plain exports: `personalInfo`, `claudeBrand`, `links`, `contacts`, `skills`, `cartoons`, `books`) — never hardcode content in components.
+Personal content and Finder files live in `src/info.js`. System labels and app/menu registries may stay with their components.
 
-- `App.js` — thin composition of the desktop; `index.js` — CRA entry point.
-- `components/` — desktop chrome: `MenuBar`, `Dock`, `DesktopIcons`, `DesktopBackground` (pure-CSS wallpaper), `GooglyEyes` (pointer-driven via `--googly-pupil-x/y`), `ClaudeWindow` (titlebar + banner, hosts the terminal). Item lists (menu entries, dock apps, desktop icons) are local constants in their component files.
-- `components/apps/` — simple pages launched by clicking dock icons: `index.js` holds the `APPS` registry + `AppOverlay`; `AppWindow.js` is the shared chrome (✕/Esc closes). One page open at a time — `openApp` state lives in `App.js`; the Claude dock icon closes the overlay (back to the terminal). Styles in `styles/apps.css`.
-- `components/icons/` — SVG glyphs: `DockGlyph.js` (registry of dock icons), `DesktopGlyph.js`, `ThemeGlyph.js`. Dock icons draw on the shared rounded-tile base in `IconTile.js`; per-icon gradient/def ids must stay unique across the document (namespace them with the icon key).
-- `hooks/` — `useTheme` (localStorage + `data-theme` attribute; exports `DARK_THEME`/`LIGHT_THEME` — import these instead of writing `'dark'`/`'light'` literals), `useMenuClock`, `useGooglyPointer`.
-- `styles/` — one stylesheet per component, imported in order by `src/index.css`; the Google Fonts `@import` must stay on line 1 of `index.css`. Dark-mode overrides live next to their component's rules as `[data-theme="dark"]` selectors.
+- `App.js` composes the desktop, windows, Dock, menu bar, Spotlight, and context menu.
+- `hooks/useWindowManager.js` owns window order, focus, visibility, and zoom. Minimized windows remain mounted to preserve app and terminal state.
+- `hooks/useWindowFrame.js` owns bounded pointer dragging, edge resizing, and viewport fitting.
+- `components/apps/registry.js` defines app labels, icons, and initial sizes. `components/apps/index.js` maps keys to content components.
+- `components/apps/AppWindow.js` supplies shared native chrome and window controls.
+- `components/icons/` contains SVG artwork. Every icon instance uses unique React `useId` prefixes for gradients and clipping.
+- `DesktopBackground` uses the existing local wallpaper through `process.env.PUBLIC_URL`.
+- `useTheme` persists appearance and sets the document theme. Import `DARK_THEME` / `LIGHT_THEME` for theme comparisons.
+- `styles/` has component styles. Native windows use container queries for responsive content, including windows resized on desktop.
+- Keep the Google Fonts import first in `index.css`; system UI and monospace fonts are the preferred font stacks.
+- `useWindowManager.test.js` and `useWindowFrame.test.js` cover focus, minimize/restore, stacking, and reachable window bounds.
+
+Use npm and preserve the case-sensitive GitHub Pages path `/About/`. UI assets must work under that subpath.

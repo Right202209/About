@@ -1,0 +1,69 @@
+.mac-window--finder { background: var(--sidebar); backdrop-filter: blur(30px) saturate(1.25); -webkit-backdrop-filter: blur(30px) saturate(1.25); }
+.mac-window--finder .mac-window__titlebar { position: absolute; top: 0; left: 0; width: 178px; height: 54px; border: 0; background: transparent; z-index: 1; padding-left: 20px; }
+.mac-window--finder .mac-window__title, .mac-window--finder .mac-window__title-spacer { display: none; }
+.mac-window--finder .mac-window__body { border-radius: 9px; overflow: hidden; }
+.app-finder { flex: 1; min-height: 0; display: grid; grid-template-columns: 178px minmax(0, 1fr); grid-template-rows: 54px minmax(0, 1fr) 27px; }
+.finder-sidebar { grid-row: 1 / 4; padding: 58px 10px 16px; overflow: auto; border-right: 1px solid var(--separator); }
+.finder-sidebar p { margin: 12px 10px 5px; color: var(--text-secondary); font-size: 11px; font-weight: 600; }
+.finder-sidebar p:first-child { margin-top: 5px; }
+.finder-sidebar button { display: flex; align-items: center; gap: 8px; width: 100%; padding: 6px 10px; border: 0; border-radius: 5px; background: transparent; font-size: 12px; text-align: left; white-space: nowrap; }
+.finder-sidebar button.is-selected { background: var(--selection-muted); }
+.finder-sidebar button .system-glyph { width: 17px; height: 17px; color: #1684f5; }
+.finder-tag { width: 11px; height: 11px; margin: 3px; border-radius: 50%; }
+.finder-tag--green { background: #66b669; }.finder-tag--orange { background: #ecae53; }
+.finder-toolbar { display: flex; align-items: center; gap: 12px; padding: 0 16px; background: var(--chrome); border-bottom: 1px solid var(--separator); user-select: none; touch-action: none; }
+.finder-toolbar button { padding: 5px; border: 0; border-radius: 4px; background: transparent; color: var(--text-secondary); }
+.finder-toolbar button:active { background: var(--selection-muted); }
+.finder-toolbar__navigation, .finder-toolbar__views { display: flex; align-items: center; gap: 4px; }
+.finder-toolbar h2 { flex: 1; font-size: 14px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0; }
+.finder-toolbar__views { gap: 1px; }
+.finder-toolbar__views button { padding: 5px 6px; }
+.finder-toolbar__views button[aria-pressed="true"] { background: var(--selection-muted); color: var(--text-primary); box-shadow: inset 0 0 0 1px #00000008; }
+.finder-toolbar .system-glyph { width: 17px; height: 17px; }
+.finder-search { display: flex; align-items: center; gap: 4px; width: 120px; padding: 4px 6px; border: 1px solid var(--separator); border-radius: 5px; background: var(--surface); color: var(--text-secondary); }
+.finder-search input { width: 100%; min-width: 0; padding: 0; border: 0; outline: 0; background: transparent; color: var(--text-primary); font-size: 11px; }
+.finder-search:focus-within { outline: 3px solid #0a84ff50; border-color: #419cf2; }
+.finder-search .system-glyph { width: 13px; height: 13px; }
+.finder-files { min-width: 0; min-height: 0; overflow: auto; background: var(--surface); align-content: start; }
+.finder-files--grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(105px, 1fr)); gap: 16px 8px; padding: 24px 19px; }
+.finder-file { display: flex; align-items: center; min-width: 0; padding: 0; background: none; border: 0; font-size: 12px; }
+.finder-files--grid .finder-file { flex-direction: column; gap: 3px; }
+.finder-file__icon { display: grid; place-items: center; width: 68px; height: 68px; border: 1px solid transparent; border-radius: 4px; padding: 2px; }
+.finder-file__icon img { max-width: 100%; max-height: 90%; box-shadow: 0 1px 3px #0004; border: 3px solid #fff; }
+.finder-file .file-icon { filter: drop-shadow(0 1px 1px #0002); }
+.finder-file__name { padding: 2px 4px; border-radius: 3px; line-height: 1.25; overflow-wrap: anywhere; }
+.finder-file.is-selected .finder-file__name { background: var(--selection); color: white; }
+.finder-files--grid .finder-file.is-selected .finder-file__icon { background: var(--selection-muted); border-color: var(--separator); }
+.finder-files--list { padding: 0 10px 12px; }
+.finder-files__head { display: flex; justify-content: space-between; padding: 7px 11px 7px 30px; border-bottom: 1px solid var(--separator); color: var(--text-secondary); font-size: 11px; }
+.finder-files__head span:last-child { width: 110px; }
+.finder-files--list .finder-file { width: 100%; border-radius: 4px; text-align: left; padding: 2px 8px; }
+.finder-files--list .finder-file:nth-child(odd) { background: var(--surface-muted); }
+.finder-files--list .finder-file.is-selected { background: var(--selection); color: white; }
+.finder-files--list .finder-file__icon { width: 24px; height: 26px; flex: none; }
+.finder-files--list .finder-file__kind { width: 110px; flex: none; margin-left: auto; color: var(--text-secondary); font-size: 11px; }
+.finder-files--list .finder-file.is-selected .finder-file__kind { color: #fffc; }
+.finder-files__empty { padding: 35px; color: var(--text-secondary); grid-column: 1 / -1; text-align: center; }
+.finder-files__empty .system-glyph { margin: auto; width: 30px; height: 30px; }
+.finder-status { background: var(--surface-muted); border-top: 1px solid var(--separator); display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 0 12px; color: var(--text-secondary); font-size: 10px; }
+.finder-status > span { display: flex; gap: 5px; align-items: center; white-space: nowrap; }
+.finder-status .system-glyph { width: 12px; height: 12px; }
+@container (max-width: 600px) {
+  .app-finder { grid-template-columns: 112px minmax(0, 1fr); grid-template-rows: 50px minmax(0, 1fr) 25px; }
+  .mac-window--finder .mac-window__titlebar { width: 112px; height: 50px; padding-left: 14px; }
+  .finder-sidebar { padding: 56px 5px 10px; }
+  .finder-sidebar button { font-size: 10px; gap: 5px; padding: 6px; }
+  .finder-sidebar p { font-size: 10px; margin-left: 6px; }
+  .finder-sidebar button .system-glyph { width: 14px; height: 14px; }
+  .finder-toolbar { padding: 0 8px; gap: 4px; flex-wrap: wrap; align-content: center; }
+  .finder-toolbar h2 { font-size: 12px; }
+  .finder-toolbar__navigation { gap: 0; }
+  .finder-toolbar__navigation button { padding: 3px; }
+  .finder-toolbar__views { display: none; }
+  .finder-search { width: 70px; }
+  .finder-files--grid { grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); padding: 15px 8px; gap: 12px 4px; }
+  .finder-file__icon { width: 59px; height: 59px; }
+  .finder-file__name { font-size: 11px; }
+  .finder-status { padding: 0 7px; }
+  .finder-status > span:first-child { overflow: hidden; }
+}

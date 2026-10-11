@@ -1,29 +1,46 @@
-1. 功能增强类 (Functional)                                                                                   
-                                                                                                               
-  - projects 命令：创建一个详细的项目展示命令。不仅列出名称，还可以通过 projects view <name>                   
-  查看项目截图（ASCII 字符画或弹出图片）和技术栈。                                                             
-  - github 实时统计：利用 GitHub API 动态获取你的仓库数量、Star 总数或最近的贡献记录（Commit 墙）。            
-  - blog 联动：既然你有一个 Jekyll 博客，可以添加一个 blog 命令，抓取并列出最新的 3-5 篇博文标题和链接。
-  - education / experience：以时间轴的形式展示你的教育背景和实习/工作经历，这对于简历页面非常实用。
+# Droit 的个人桌面
 
-  2. 交互与个性化 (Interactive)
+基于 React 的 macOS 风格个人主页，使用现有的 4K 红杉林壁纸、半透明菜单栏与 Dock、原生比例的窗口，以及 SVG 应用和文件图标。
 
-  - theme 切换：支持多种终端配色方案。例如：
-    - theme matrix (黑底绿字)
-    - theme retro (复古灰底)
-    - theme dracula (经典暗色)
-  - sudo 复活节彩蛋：当用户输入 sudo <command> 时，返回一些幽默的内容，比如 "Nice try, but you don't have root
-  privileges here." 或者触发一个特殊的动画。
-  - weather 工具：调用简单的天气 API，根据用户 IP 显示当地天气。
+- 多窗口独立叠放，支持拖动、边缘缩放、最大化、最小化和 Dock 恢复。
+- Finder 支持目录导航、搜索、图标／列表视图和个人主页快捷方式。
+- Safari 收藏夹、Mail 联系方式、Music 个人收藏和代码风格的技能展示。
+- Spotlight 应用搜索、控制中心、日历与桌面右键菜单。
+- 持久化明暗主题、壁纸亮度调节、按窗口宽度适配，以及减少动画偏好。
+- 保留 Claude Code 风格终端的命令、历史、自动补全和中断功能。
 
-  3. 趣味与视觉 (Fun & Visual)
+## 本地运行
 
-  - ascii 艺术：添加一个显示你名字或 Logo 的大型 ASCII 字符画命令。
-  - music 播放器：集成一个简单的背景音乐播放器，或者列出你最近在 Spotify 上听的歌。
-  - matrix 动画：输入命令后全屏进入类似《黑客帝国》的数字雨效果。
-  - 更多小游戏：除了 2048，可以加入 snake (贪吃蛇) 或 guess-number (猜数字)。
+使用 Node.js 20 或更新版本和 npm：
 
-  4. 技术优化建议 (Architecture)
+```sh
+npm ci --legacy-peer-deps
+npm start
+```
 
-  - 多语言支持 (lang)：在 info.js 中配置中英文双语，通过 lang en 或 lang zh 实时切换终端显示语言。
-  - 命令自动补全：如果 react-terminal-app 支持，可以优化 Tab 键补全功能，提升“极客”体验。
+原有的 `react-terminal-app` 依赖虽然已不参与运行，安装时仍需要兼容旧版 peer dependency。
+
+```sh
+CI=true npm test -- --watchAll=false --runInBand
+npm run build
+```
+
+## 操作方式
+
+双击桌面文件夹打开，触屏设备单击打开。拖动标题栏移动窗口，双击标题栏缩放，拖动边缘调整大小。红、黄、绿按钮分别关闭、最小化和最大化窗口；点击 Dock 图标可打开或恢复应用。
+
+| 快捷键 | 功能 |
+| --- | --- |
+| ⌘ / Ctrl + K | Spotlight 搜索 |
+| ⌘ / Ctrl + N | 打开 Finder |
+| ⌘ / Ctrl + M | 最小化当前窗口 |
+| ⇧ + ⌘ / Ctrl + D | 显示／恢复桌面 |
+| Escape | 关闭菜单和 Spotlight |
+
+在终端输入 `help` 查看命令。上下方向键切换历史，Tab 补全，Ctrl+C 中断命令。
+
+## 自定义与部署
+
+个人资料和 Finder 快捷方式统一放在 `src/info.js`。应用注册信息位于 `src/components/apps/registry.js`，SVG 图标位于 `src/components/icons/`，组件样式位于 `src/styles/`。
+
+保留 GitHub Pages 的 **/About/** 基础路径。现有 GitHub Actions 会在推送到 `main` 后构建并发布，也可使用 `npm run deploy` 手动部署。

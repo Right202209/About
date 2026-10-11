@@ -1,9 +1,5 @@
+import DockGlyph from '../icons/DockGlyph';
+
 export default function TrashApp() {
-  return (
-    <div className="app-trash">
-      <span className="app-trash__glyph" aria-hidden="true">🗑️</span>
-      <p className="app-trash__title">Trash is empty</p>
-      <p className="app-trash__hint">Droit keeps a tidy desktop — nothing to clean here.</p>
-    </div>
-  );
+  return <div className="app-trash"><DockGlyph type="trash" /><h2>Trash is Empty</h2><p>Nothing here. A fresh start.</p></div>;
 }

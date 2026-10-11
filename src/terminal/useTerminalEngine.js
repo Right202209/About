@@ -125,6 +125,7 @@ export default function useTerminalEngine({ theme, onThemeChange }) {
     }
     bootedRef.current = true;
     run(BOOT_COMMAND, { isBoot: true });
+    return () => processRef.current?.cancel();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

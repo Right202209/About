@@ -1,51 +1,24 @@
-/* Shared building blocks for the 64×64 dock icon set. */
+import { useId } from 'react';
 
-export const DOCK_VIEW_BOX = '0 0 64 64';
+export const TILE_PATH = 'M40 8h48c22 0 32 10 32 32v48c0 22-10 32-32 32H40C18 120 8 110 8 88V40C8 18 18 8 40 8Z';
 
-const TILE_RECT = { x: 8, y: 8, width: 48, height: 48, rx: 12 };
-const TILE_EDGE_COLOR = 'rgba(255, 255, 255, 0.5)';
-const TILE_EDGE_WIDTH = 1.2;
-const GLOSS_PATH = 'M8 20a12 12 0 0 1 12-12h24a12 12 0 0 1 12 12v7H8z';
-const GLOSS_TOP_OPACITY = 0.28;
-
-export function VerticalFade({ id, from, to }) {
+/* Definitions are unique even when the same icon appears in several windows. */
+export default function IconTile({ from, to, children, tile = true }) {
+  const id = useId().replace(/:/g, '');
   return (
-    <linearGradient id={id} x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stopColor={from} />
-      <stop offset="100%" stopColor={to} />
-    </linearGradient>
-  );
-}
-
-export function DiagonalFade({ id, from, to }) {
-  return (
-    <linearGradient id={id} x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stopColor={from} />
-      <stop offset="100%" stopColor={to} />
-    </linearGradient>
-  );
-}
-
-/*
- * Rounded macOS-style tile: base fill, artwork (children), then a top gloss
- * sheen and a hairline edge. `id` namespaces the per-icon gradient defs so
- * multiple tiles can coexist in one document.
- */
-export default function IconTile({ id, fill, defs, children }) {
-  const glossId = `${id}-tile-gloss`;
-  return (
-    <svg className="dock__glyph" viewBox={DOCK_VIEW_BOX} aria-hidden="true">
+    <svg className="app-icon" viewBox="0 0 128 128" fill="none" aria-hidden="true">
       <defs>
-        <linearGradient id={glossId} x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stopColor="#ffffff" stopOpacity={GLOSS_TOP_OPACITY} />
-          <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+        <linearGradient id={`${id}-base`} x2="0" y2="1">
+          <stop stopColor={from} /><stop offset="1" stopColor={to || from} />
         </linearGradient>
-        {defs}
+        <linearGradient id={`${id}-shine`} x2="0" y2="1">
+          <stop stopColor="white" stopOpacity=".6" /><stop offset="1" stopColor="white" stopOpacity="0" />
+        </linearGradient>
+        <clipPath id={`${id}-clip`}><path d={TILE_PATH} /></clipPath>
       </defs>
-      <rect {...TILE_RECT} fill={fill} />
-      {children}
-      <path d={GLOSS_PATH} fill={`url(#${glossId})`} />
-      <rect {...TILE_RECT} fill="none" stroke={TILE_EDGE_COLOR} strokeWidth={TILE_EDGE_WIDTH} />
+      {tile && <path d={TILE_PATH} fill={`url(#${id}-base)`} />}
+      {typeof children === 'function' ? children(id) : children}
+      {tile && <path d={TILE_PATH} stroke={`url(#${id}-shine)`} strokeWidth="1.5" />}
     </svg>
   );
 }

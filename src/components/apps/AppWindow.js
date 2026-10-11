@@ -1,36 +1,38 @@
 import { useEffect } from 'react';
+import useWindowFrame from '../../hooks/useWindowFrame';
+import WindowControls from '../WindowControls';
+import DockGlyph from '../icons/DockGlyph';
+import { APP_INFO } from './registry';
 
-const ESCAPE_KEY = 'Escape';
+const RESIZE_EDGES = ['n', 'e', 's', 'w', 'ne', 'se', 'sw', 'nw'];
 
-/* Shared macOS-style chrome for dock-launched app pages. Esc or ✕ closes. */
-export default function AppWindow({ title, onClose, children }) {
+export default function AppWindow({ window, index, active, manager, children }) {
+  const { key, minimized, maximized } = window;
+  const app = APP_INFO[key];
+  const frame = useWindowFrame({ preferred: app, index, maximized });
   useEffect(() => {
-    const handleKey = event => {
-      if (event.key === ESCAPE_KEY) {
-        onClose();
-      }
-    };
-    document.addEventListener('keydown', handleKey);
-    return () => document.removeEventListener('keydown', handleKey);
-  }, [onClose]);
-
+    const node = frame.ref.current;
+    if (active && !minimized && !node?.contains(document.activeElement)) {
+      const target = node?.querySelector('.claude-terminal__input:not(:disabled)') || node;
+      target?.focus({ preventScroll: true });
+    }
+  }, [active, minimized, window.focusVersion, frame.ref]);
+  const toggleZoom = event => {
+    if (!event.target.closest('button')) manager.zoom(key);
+  };
   return (
-    <section className="app-window" role="dialog" aria-label={title}>
-      <header className="app-window__titlebar">
-        <span className="app-window__traffic">
-          <button
-            type="button"
-            className="app-window__dot app-window__dot--close"
-            onClick={onClose}
-            aria-label={`Close ${title}`}
-          />
-          <i className="app-window__dot app-window__dot--min" aria-hidden="true" />
-          <i className="app-window__dot app-window__dot--max" aria-hidden="true" />
-        </span>
-        <span className="app-window__title">{title}</span>
-        <span className="app-window__spacer" aria-hidden="true" />
+    <section ref={frame.ref} role="dialog" aria-label={app.title} tabIndex={-1} hidden={minimized}
+      data-app={key} className={`mac-window mac-window--${key}${active ? ' is-active' : ''}${frame.moving ? ' is-moving' : ''}${maximized ? ' is-maximized' : ''}`}
+      style={{ ...frame.style, zIndex: index + 1 }} onPointerDownCapture={() => manager.focus(key)}
+      onPointerDown={event => { if (event.target.closest('[data-window-drag]')) frame.begin(event); }}
+      onPointerMove={frame.move} onPointerUp={frame.end} onPointerCancel={frame.end}>
+      <header className="mac-window__titlebar" onPointerDown={frame.begin} onDoubleClick={toggleZoom}>
+        <WindowControls title={app.label} maximized={maximized} onClose={() => manager.close(key)} onMinimize={() => manager.minimize(key)} onZoom={() => manager.zoom(key)} />
+        <div className="mac-window__title"><DockGlyph type={app.icon} /><span>{app.title}</span></div>
+        <span className="mac-window__title-spacer" />
       </header>
-      <div className="app-window__body">{children}</div>
+      <div className="mac-window__body">{children}</div>
+      {!maximized && RESIZE_EDGES.map(edge => <div key={edge} className={`window-resize window-resize--${edge}`} aria-hidden="true" onPointerDown={event => frame.begin(event, edge)} />)}
     </section>
   );
 }

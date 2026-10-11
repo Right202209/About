@@ -1,13 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @import './styles/base.css';
 @import './styles/desktop.css';
 @import './styles/menu.css';
-@import './styles/googly.css';
+@import './styles/system-panels.css';
+@import './styles/spotlight.css';
 @import './styles/desktop-icons.css';
 @import './styles/dock.css';
 @import './styles/window.css';
 @import './styles/apps.css';
+@import './styles/finder.css';
+@import './styles/settings.css';
 @import './styles/app-pages.css';
 @import './styles/terminal.css';
 @import './styles/toolbox.css';

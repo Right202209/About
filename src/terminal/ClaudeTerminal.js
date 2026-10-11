@@ -14,6 +14,7 @@ function resetDesktopScroll() {
 
 function makeKeyHandler(entry) {
   return event => {
+    if (event.nativeEvent.isComposing) return;
     if (event.ctrlKey && event.key === 'c') {
       event.preventDefault();
       entry.interrupt();
@@ -94,7 +95,8 @@ function InputRow({ entry, onKeyDown, disabled, inputRef }) {
           onKeyDown={onKeyDown}
           onFocus={resetDesktopScroll}
           disabled={disabled}
-          autoFocus
+          aria-label="Terminal command"
+          placeholder={disabled ? 'Working…' : 'Type help to get started'}
           autoComplete="off"
           autoCorrect="off"
           autoCapitalize="off"
@@ -105,7 +107,7 @@ function InputRow({ entry, onKeyDown, disabled, inputRef }) {
   );
 }
 
-export default function ClaudeTerminal({ theme, onThemeChange }) {
+export default function ClaudeTerminal({ theme, onThemeChange, active }) {
   const engine = useTerminalEngine({ theme, onThemeChange });
   const entry = useTerminalInput(engine);
   const inputRef = useRef(null);
@@ -118,21 +120,24 @@ export default function ClaudeTerminal({ theme, onThemeChange }) {
 
   useEffect(() => {
     if (endRef.current) {
-      endRef.current.scrollIntoView({ behavior: 'smooth' });
+      const output = endRef.current.parentElement;
+      output.scrollTop = output.scrollHeight;
     }
   }, [engine.lines]);
 
   useEffect(() => {
-    if (!busy && inputRef.current) {
-      inputRef.current.focus();
+    if (active && !busy && inputRef.current) {
+      const focused = document.activeElement;
+      const window = inputRef.current.closest('.mac-window');
+      if (focused === document.body || window?.contains(focused)) inputRef.current.focus({ preventScroll: true });
     }
-  }, [busy]);
+  }, [active, busy]);
 
-  useGlobalInterrupt({ active: engine.isRunning, interruptRef });
+  useGlobalInterrupt({ active: active && engine.isRunning, interruptRef });
 
   const focusInput = () => {
     if (inputRef.current) {
-      inputRef.current.focus();
+      inputRef.current.focus({ preventScroll: true });
     }
     resetDesktopScroll();
   };
@@ -141,6 +146,7 @@ export default function ClaudeTerminal({ theme, onThemeChange }) {
     <div className="claude-terminal" onClick={focusInput}>
       <OutputView lines={engine.lines} showThinking={showThinking} endRef={endRef} />
       <InputRow entry={entry} onKeyDown={makeKeyHandler(entry)} disabled={busy} inputRef={inputRef} />
+      <div className="claude-terminal__status"><span><kbd>↑↓</kbd> history <kbd>tab</kbd> complete</span><span><kbd>ctrl c</kbd> interrupt</span></div>
     </div>
   );
 }

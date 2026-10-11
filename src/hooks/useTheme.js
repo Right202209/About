@@ -4,7 +4,7 @@ export const DARK_THEME = 'dark';
 export const LIGHT_THEME = 'light';
 
 const THEME_STORAGE_KEY = 'about:theme';
-const META_THEME_COLOR = { [DARK_THEME]: '#03040b', [LIGHT_THEME]: '#0b111a' };
+const META_THEME_COLOR = { [DARK_THEME]: '#18251c', [LIGHT_THEME]: '#354737' };
 
 function readSavedTheme() {
   try {

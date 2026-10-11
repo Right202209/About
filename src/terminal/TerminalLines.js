@@ -1,5 +1,5 @@
 import { claudeBrand } from '../info';
-import { JSON_INDENT } from './constants';
+import SystemGlyph from '../components/icons/SystemGlyph';
 
 export function isRunningToolLine(line) {
   return line.type === 'tool_call' && line.text && line.text.status === 'running';
@@ -16,21 +16,19 @@ function InputEcho({ text }) {
 
 function ToolCallBox({ call }) {
   const running = call.status === 'running';
+  const args = Object.values(call.args || {}).map(value => typeof value === 'string' ? value : JSON.stringify(value)).join(', ');
   return (
     <div className={`claude-tool-box claude-tool-box--${call.status}`}>
       <div className="claude-tool-box__header">
         <span className="claude-tool-box__status-dot" />
         <span className="claude-tool-box__title">
-          {running ? 'Running tool:' : 'Used tool:'} <strong>{call.tool}</strong>
+          <strong>{call.tool}</strong><span className="claude-tool-box__args">({args})</span>
         </span>
         {running && <span className="claude-tool-box__spinner" />}
       </div>
-      <div className="claude-tool-box__body">
-        <pre>{JSON.stringify(call.args, null, JSON_INDENT)}</pre>
-      </div>
       {!running && call.result && (
         <div className="claude-tool-box__footer">
-          <span>⎿ {call.result}</span>
+          <SystemGlyph name="branch" /><span>{call.result}</span>
         </div>
       )}
     </div>

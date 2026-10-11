@@ -1,0 +1,21 @@
+.spotlight-backdrop { position: absolute; inset: 0; z-index: 90; background: #0000000a; }
+.spotlight { position: absolute; top: 22%; left: 50%; width: min(640px, calc(100% - 32px)); transform: translateX(-50%); border: 1px solid var(--glass-edge); border-radius: 12px; background: var(--glass); backdrop-filter: blur(45px) saturate(1.6); -webkit-backdrop-filter: blur(45px) saturate(1.6); box-shadow: 0 28px 70px #0005, 0 0 0 1px #0003; overflow: hidden; animation: menu-appear 120ms ease; }
+.spotlight__search { display: flex; gap: 15px; align-items: center; padding: 18px 20px; }
+.spotlight__search > .system-glyph { width: 26px; height: 26px; color: var(--text-secondary); stroke-width: 1.5; }
+.spotlight__search input { width: 100%; min-width: 0; font-size: 25px; font-weight: 300; background: none; border: 0; outline: 0; color: var(--text-primary); }
+.spotlight__search input::placeholder { color: var(--text-secondary); }
+.spotlight__close { padding: 3px 6px; background: transparent; border: 1px solid var(--separator); border-radius: 4px; color: var(--text-secondary); font-size: 10px; }
+.spotlight__results { padding: 0 10px 10px; border-top: 1px solid var(--separator); }
+.spotlight__category { margin: 12px 10px 7px; font-size: 11px; color: var(--text-secondary); font-weight: 600; }
+.spotlight__result { display: flex; align-items: center; gap: 10px; min-height: 42px; padding: 5px 10px; border-radius: 6px; user-select: none; }
+.spotlight__result .app-icon { width: 30px; height: 30px; flex: none; }
+.spotlight__result small { margin-left: auto; color: var(--text-secondary); font-size: 11px; }
+.spotlight__result.is-selected { background: var(--selection); color: #fff; }
+.spotlight__result.is-selected small { color: #ffffffb3; }
+.spotlight__enter { margin-left: 5px; width: 14px; height: 14px; }
+.spotlight__empty { padding: 20px 10px; color: var(--text-secondary); }
+.spotlight__footer { display: flex; justify-content: flex-end; gap: 16px; border-top: 1px solid var(--separator); padding: 9px 18px; font-size: 10px; color: var(--text-secondary); }
+.spotlight__footer > span { display: flex; align-items: center; gap: 5px; }
+.spotlight__footer .system-glyph { width: 12px; height: 12px; }
+@media (max-width: 600px) { .spotlight { top: 15%; } .spotlight__search input { font-size: 21px; } }
+@media (max-height: 600px) { .spotlight { top: 8%; max-height: 84%; overflow: auto; } }

@@ -32,7 +32,7 @@ Note: the branch `fix/react18-terminal-peer-conflict` (unmerged) was the first p
 - **Package manager is npm** (CI runs `npm ci --legacy-peer-deps` on Node 20). A `yarn.lock` is also checked in but unused — don't install with yarn.
 - **`react-terminal-app` is no longer used at runtime** (the custom terminal replaced it) but is still listed in `package.json`, so installs may still hit the React 18 peer conflict — use `--legacy-peer-deps`. Removing the dependency (and regenerating the lockfile) is a safe future cleanup.
 - **The root `webpack.config.js` is stale and unused** (and broken: missing `HtmlWebpackPlugin` import, duplicate `mode` key, points at a non-existent `src/index.html`). The real build is Create React App / `react-scripts`; ignore this file.
-- **No tests exist** — `npm test` starts the react-scripts watcher, but `src/` contains no `*.test.js` files.
+- **Window regression tests** live in `src/hooks/useWindowManager.test.js` and `useWindowFrame.test.js`. Run `CI=true npm test -- --watchAll=false --runInBand` for a non-interactive check.
 - `homepage` in `package.json` is `/About` (capital A) and must match the repo-path casing, or built asset URLs 404 on Pages (this was a recent fix).
 
 ## Architecture (on `main`)

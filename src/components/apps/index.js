@@ -1,4 +1,5 @@
-import AppWindow from './AppWindow';
+import ClaudeWindow from '../ClaudeWindow';
+import AboutApp from './AboutApp';
 import CodeApp from './CodeApp';
 import FinderApp from './FinderApp';
 import MailApp from './MailApp';
@@ -7,30 +8,11 @@ import SafariApp from './SafariApp';
 import SettingsApp from './SettingsApp';
 import TrashApp from './TrashApp';
 
-const APPS = {
-  finder: { title: 'Finder', Component: FinderApp },
-  safari: { title: 'Safari', Component: SafariApp },
-  mail: { title: 'Mail', Component: MailApp },
-  music: { title: 'Music', Component: MusicApp },
-  code: { title: 'Code — Droit', Component: CodeApp },
-  settings: { title: 'System Settings', Component: SettingsApp },
-  trash: { title: 'Trash', Component: TrashApp }
-};
+const COMPONENTS = { claude: ClaudeWindow, finder: FinderApp, safari: SafariApp, mail: MailApp, music: MusicApp, code: CodeApp, settings: SettingsApp, trash: TrashApp, about: AboutApp };
 
-/* The Claude dock item is not here on purpose: it re-focuses the terminal. */
-export const isLaunchableApp = key => Boolean(APPS[key]);
+export { isLaunchableApp } from './registry';
 
-export default function AppOverlay({ appKey, onClose, theme, onThemeChange }) {
-  const app = APPS[appKey];
-  if (!app) {
-    return null;
-  }
-  const { title, Component } = app;
-  return (
-    <div className="app-overlay">
-      <AppWindow title={title} onClose={onClose}>
-        <Component theme={theme} onThemeChange={onThemeChange} />
-      </AppWindow>
-    </div>
-  );
+export default function AppContent({ appKey, ...props }) {
+  const Component = COMPONENTS[appKey];
+  return Component ? <Component {...props} /> : null;
 }

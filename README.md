@@ -1,66 +1,50 @@
-# About Me - Terminal Portfolio
+# Droit's Personal Desktop
 
-A React-based terminal-style personal portfolio page. This is part of my homepage collection.
+A React portfolio inspired by macOS: a redwood wallpaper, translucent menu bar and Dock, native window chrome, and hand-drawn SVG app and file icons.
 
-## Features
-- **Terminal Interface**: Interactive command-line experience.
-- **Static Commands**: Quick access to contact info, skills, and interests.
-- **Dynamic Commands**: Interactive logic for introductions and opening external links.
-- **Centralized Config**: All personal data is managed in `src/info.js` for easy updates.
+- Independent windows with dragging, edge resizing, zoom, minimize, and Dock restore.
+- Finder with folder navigation, search, icon/list views, and working portfolio shortcuts.
+- Safari favorites, contact links in Mail, a personal collection in Music, and a skills editor.
+- Spotlight app search, Control Center, calendar, and a desktop context menu.
+- Persistent light/dark appearance, wallpaper brightness, responsive window layouts, and reduced-motion support.
+- The existing Claude Code-style terminal, including commands, history, autocomplete, and interrupt.
 
-## Getting Started
+## Run locally
 
-### Prerequisites
-- Node.js (v16 or higher recommended)
-- npm or yarn
+Use Node.js 20 or newer and npm:
 
-### Installation
-```bash
-npm install
-```
-
-### Development
-```bash
+```sh
+npm ci --legacy-peer-deps
 npm start
 ```
-Runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### Build
-```bash
+The legacy peer flag is needed by the existing `react-terminal-app` dependency, which is no longer used by the application.
+
+```sh
+CI=true npm test -- --watchAll=false --runInBand
 npm run build
 ```
-Builds the app for production to the `build` folder.
 
-### Deployment
-```bash
-npm run deploy
-```
-Deploys the production build to GitHub Pages.
+## Desktop controls
 
-## Project Structure
-- `src/info.js`: **Central configuration file.** Edit this to change your name, email, skills, etc.
-- `src/static.js`: Definitions for simple list-based commands.
-- `src/dynamic.js`: Definitions for interactive commands (Promises/Callbacks).
-- `src/App.js`: Main terminal component configuration.
+Double-click a desktop folder to open it; on touch devices, tap once. Drag the title bar to move a window, double-click it to zoom, or drag an edge to resize. The red, yellow, and green controls close, minimize, and zoom. Click a Dock icon to open or restore an app.
 
-## TODO List (Future Ideas)
+| Shortcut | Action |
+| --- | --- |
+| ⌘ / Ctrl + K | Spotlight search |
+| ⌘ / Ctrl + N | Open Finder |
+| ⌘ / Ctrl + M | Minimize the active window |
+| ⇧ + ⌘ / Ctrl + D | Show / restore the desktop |
+| Escape | Dismiss menus and Spotlight |
 
-### Functional Enhancements
-- [ ] **`projects` command**: Detailed project showcase with tech stacks and descriptions.
-- [ ] **GitHub Integration**: Fetch live stats (stars, repos) using GitHub API.
-- [ ] **Blog Linkage**: Fetch and display latest posts from the Jekyll blog.
-- [ ] **Timeline**: Add `education` and `experience` commands with a chronological view.
+In Terminal, type `help`. Arrow keys browse command history; Tab completes a command; Ctrl+C interrupts it.
 
-### Interactive Features
-- [ ] **`theme` switching**: Support for different color schemes (Matrix, Retro, Dracula).
-- [ ] **`sudo` easter egg**: Humorous responses for unauthorized sudo attempts.
-- [ ] **`weather` command**: Display local weather based on IP.
-- [ ] **Multi-language support**: Toggle between English and Chinese via `lang` command.
+## Customize
 
-### Fun & Visuals
-- [ ] **ASCII Art**: Large ASCII logo/name display on startup.
-- [ ] **Mini-games**: Add classic games like `snake` or `guess-number`.
-- [ ] **Matrix effect**: A full-screen digital rain animation command.
+Personal content and Finder shortcuts live in `src/info.js`. App metadata lives in `src/components/apps/registry.js`, SVG artwork in `src/components/icons/`, and window behavior in `src/hooks/useWindowManager.js` and `useWindowFrame.js`. Component styles live in `src/styles/`.
 
----
-Built with [react-terminal-app](https://github.com/Tomotoes/react-terminal-app).
+## GitHub Pages
+
+The production base path is **/About/**. The existing GitHub Actions workflow builds and publishes on pushes to `main`. A manual `npm run deploy` command is also available.
+
+The desktop runs entirely in the browser; no backend or credentials are required.

@@ -24,6 +24,19 @@ export const links = {
   game2048: 'https://right202209.github.io/2048/'
 };
 
+export const finderItems = [
+  { name: 'Projects', type: 'folder', place: 'Projects', locations: ['Home', 'Desktop'] },
+  { name: 'Notes', type: 'folder', place: 'Documents', locations: ['Home', 'Desktop'] },
+  { name: 'Assets', type: 'folder', place: 'Assets', locations: ['Home', 'Desktop'] },
+  { name: 'About Me.txt', type: 'document', app: 'about', locations: ['Home', 'Documents'] },
+  { name: 'skills.json', type: 'code', app: 'code', locations: ['Home', 'Projects', 'Documents'] },
+  { name: 'Portfolio.webloc', type: 'document', url: links.menu, locations: ['Projects'] },
+  { name: '2048.webloc', type: 'document', url: links.game2048, locations: ['Projects'] },
+  { name: 'Resume.webloc', type: 'document', url: links.resume, locations: ['Documents', 'Downloads'] },
+  { name: 'droit.jpg', type: 'image', url: `${process.env.PUBLIC_URL}/droit.jpg`, locations: ['Assets'] },
+  { name: 'macOS wallpaper.jpg', type: 'image', url: `${process.env.PUBLIC_URL}/macos26-desktop.jpg`, locations: ['Assets'] }
+];
+
 export const contacts = [
   { label: 'Email:', content: '`tunhe38@gmail.com`' },
   { label: 'Github:', content: '`https://github.com/right202209`' },
